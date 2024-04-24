@@ -4,11 +4,12 @@ import pkg from './package.json';
 
 
 // Configs
-var configs = {
+const configs = {
 	name: 'foundationPureHtml',
 	files: ['main.js', 'detects.js', 'another-file.js'],
-	formats: ['iife', 'es', 'amd', 'cjs'],
-	default: 'iife',
+	// formats: ['iife', 'es', 'amd', 'cjs'],
+	formats: ['es'],
+	default: 'es',
 	pathIn: 'src/resource/js',
 	pathOut: 'dist/resource/js',
 	minify: true,
@@ -16,12 +17,13 @@ var configs = {
 };
 
 // Banner
-var banner = `/*! ${configs.name ? configs.name : pkg.name} v${pkg.version} | (c) ${new Date().getFullYear()} ${pkg.author.name} | ${pkg.license} License | ${pkg.repository.url} */`;
+const banner = `/*! ${configs.name ? configs.name : pkg.name} v${pkg.version} | (c) ${new Date().getFullYear()} ${pkg.author.name} | ${pkg.license} License | ${pkg.repository.url} */`;
 
-var createOutput = function (filename, minify) {
+const createOutput = function (filename, minify) {
 	return configs.formats.map(function (format) {
-		var output = {
-			file: `${configs.pathOut}/${filename}${format === configs.default ? '' : `.${format}`}${minify ? '.min' : ''}.js`,
+		const output = {
+			// file: `${configs.pathOut}/${filename}${format === configs.default ? '' : `.${format}`}${minify ? '.min' : ''}.js`,
+			file: `${configs.pathOut}/${filename}${format === configs.default ? '' : `.${format}`}.js`,
 			format: format,
 			banner: banner
 		};
@@ -43,16 +45,16 @@ var createOutput = function (filename, minify) {
  * @param  {String} filename The filename
  * @return {Array}           The outputs array
  */
-var createOutputs = function (filename) {
+const createOutputs = function (filename) {
 
 	// Create base outputs
-	var outputs = createOutput(filename);
+	const outputs = createOutput(filename);
 
 	// If not minifying, return outputs
 	if (!configs.minify) return outputs;
 
 	// Otherwise, ceate second set of outputs
-	var outputsMin = createOutput(filename, true);
+	const outputsMin = createOutput(filename, true);
 
 	// Merge and return the two arrays
 	return outputs.concat(outputsMin);
@@ -63,9 +65,9 @@ var createOutputs = function (filename) {
  * Create export object
  * @return {Array} The export object
  */
-var createExport = function (file) {
+const createExport = function (file) {
 	return configs.files.map(function (file) {
-		var filename = file.replace('.js', '');
+		const filename = file.replace('.js', '');
 		return {
 			input: `${configs.pathIn}/${file}`,
 			output: createOutputs(filename)

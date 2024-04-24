@@ -74,7 +74,7 @@ In the `rollup.config.js` file, there's a `configs` object that you can use to c
 
 ```js
 // Configs
-var configs = {
+const configs = {
     name: 'MyProject',                // Global namespace to use for IIFEs [optional]
     files: ['main.js', 'detects.js'], // The files to process
     formats: ['iife', 'es'],          // The formats to output - will be added as a suffix to the filename (ex. main.es.js)
@@ -94,7 +94,7 @@ _If a `configs.name` property is included, that will be used. If not, the banner
 
 ```js
 // Banner
-var banner = `/*! ${configs.name ? configs.name : pkg.name} v${pkg.version} | (c) ${new Date().getFullYear()} ${pkg.author.name} | ${pkg.license} License | ${pkg.repository.url} */`;
+const banner = `/*! ${configs.name ? configs.name : pkg.name} v${pkg.version} | (c) ${new Date().getFullYear()} ${pkg.author.name} | ${pkg.license} License | ${pkg.repository.url} */`;
 ```
 
 To concatentate multiple files into one, use the ES modules `import` feature.
@@ -132,7 +132,7 @@ In the `sass.js` file, there's a `configs` object that you can use to control wh
 
 ```js
 // Configs
-var configs = {
+const configs = {
     name: 'MyProject',    // The name to use in the file banner
     files: ['main.scss'], // The files to process
     pathIn: 'src/scss',   // The source directory for your Sass files
@@ -152,7 +152,7 @@ _If a `configs.name` property is included, that will be used. If not, the banner
 
 ```js
 // Banner
-var banner = `/*! ${configs.name ? configs.name : pkg.name} v${pkg.version} | (c) ${new Date().getFullYear()} ${pkg.author.name} | ${pkg.license} License | ${pkg.repository.url} */`;
+const banner = `/*! ${configs.name ? configs.name : pkg.name} v${pkg.version} | (c) ${new Date().getFullYear()} ${pkg.author.name} | ${pkg.license} License | ${pkg.repository.url} */`;
 ```
 
 Sass files should be in the `src/scss` directory. Use this task to run the build.
