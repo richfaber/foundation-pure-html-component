@@ -5,7 +5,7 @@ const pkg = require('./package.json');
 
 // Configs
 const configs = {
-	name: 'BuildToolsCookbook',
+	name: 'foundationPureHtml',
 	files: ['app.scss'],
 	pathIn: 'src/scss',
 	pathOut: 'dist/css',

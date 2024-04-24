@@ -5,12 +5,12 @@ import pkg from './package.json';
 
 // Configs
 var configs = {
-	name: 'BuildToolsCookbook',
+	name: 'foundationPureHtml',
 	files: ['main.js', 'detects.js', 'another-file.js'],
 	formats: ['iife', 'es', 'amd', 'cjs'],
 	default: 'iife',
-	pathIn: 'src/js',
-	pathOut: 'dist/js',
+	pathIn: 'src/resource/js',
+	pathOut: 'dist/resource/js',
 	minify: true,
 	sourceMap: false
 };
