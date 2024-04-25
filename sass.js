@@ -7,8 +7,8 @@ const pkg = require('./package.json');
 const configs = {
 	name: 'foundationPureHtml',
 	files: ['app.scss'],
-	pathIn: 'src/scss',
-	pathOut: 'dist/css',
+	pathIn: 'src/resource/scss',
+	pathOut: 'dist/resource/css',
 	indentType: 'space',
 	indentWidth: 2,
 	minify: true,
