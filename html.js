@@ -6,8 +6,7 @@ nunjucksToHtml( [ '**/*.njk' ], {
   'ext': '.html',
   'baseDir': 'src/page',
   'cwd': process.cwd(),
-  'flatten': false,
-  'exclude': ['layout/**/*']
+  'flatten': false
 }).then( ( results ) => {
 
   console.log('## Nunjucks 컴파일 완료')
