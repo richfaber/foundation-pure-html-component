@@ -1,34 +1,57 @@
+const dotenv = require('dotenv')
+
+if (process.env.NODE_ENV === 'production') {
+  dotenv.config({ path: '.env.production' })
+} else {
+  dotenv.config({ path: '.env.local' })
+}
+
 // https://mozilla.github.io/nunjucks/api.html#configure
 module.exports = {
   "options": {
     /**
-     * A path to the file containing data for the template.
-     * If you want to pass an object, use "render.context" instead.
+     * 템플릿에 대한 데이터를 포함하는 파일 경로입니다.
+     * 객체를 전달하고 싶다면, 대신 "render.context"를 사용하세요.
      */
     // "data": "some/path/on/cwd.js",
     /**
-     * A hook that's called before calling nunjucks.render()
-     * but after nunjucks.configure().
+     * nunjucks.render()를 호출하기 전, 그러나 nunjucks.configure() 후에 호출되는 훅입니다.
      *
-     * Return false to skip rendering (and writing).
+     * 렌더링(과 파일 쓰기)을 건너뛰려면 false를 반환하세요.
      */
-    beforeRender (nunjucksEnv, renderName, renderData) { let nunjucks = this; },
+    beforeRender (nunjucksEnv, renderName, renderData) {
+      let nunjucks = this;
+
+      const currentDate = new Date();
+      const dateStr = {
+        year: currentDate.getFullYear(),
+        month: (currentDate.getMonth() < 10) ? "0" + currentDate.getMonth() : currentDate.getMonth(),
+        day: (currentDate.getDate() < 10) ? "0" + currentDate.getDate() : currentDate.getDate(),
+        hour: (currentDate.getHours() < 10) ? "0" + currentDate.getHours() : currentDate.getHours(),
+        time: (currentDate.getMinutes() < 10) ? "0" + currentDate.getMinutes() : currentDate.getMinutes()
+      }
+
+      nunjucksEnv.addGlobal('userEnv', process.env.userEnv);
+      nunjucksEnv.addGlobal('userName', process.env.userName);
+      nunjucksEnv.addGlobal('userEmail', process.env.userEmail);
+      nunjucksEnv.addGlobal('currentDate', `${dateStr.year}-${dateStr.month}-${dateStr.day} ${dateStr.hour}:${dateStr.time}`);
+
+    },
     /**
-     * A hook that's called after calling nunjucks.render()
-     * but before writing to a file.
+     * nunjucks.render() 호출 후, 파일에 쓰기 전에 호출되는 훅입니다.
      *
-     * Return false to skip writing.
+     * 쓰기를 건너뛰려면 false를 반환하세요.
      */
     beforeWrite (destinationFilepath, renderResult) { let nunjucks = this; }
   },
 
   /**
-   * The following keys are members of Nunjucks.
-   * To modify any parameter or see possible values,
-   * plese check https://mozilla.github.io/nunjucks/api.html
+   * 다음 키들은 Nunjucks의 멤버입니다.
+   * 어떤 매개변수를 수정하거나 가능한 값을 보려면,
+   * https://mozilla.github.io/nunjucks/api.html을 확인해주세요.
    */
 
-  // Executes nunjucks.configure([path], [options]).
+  // nunjucks.configure([경로], [옵션])을 실행합니다.
   "configure": {
     "path": 'src',
     "options": {
@@ -38,16 +61,16 @@ module.exports = {
     }
   },
 
-  // Executes nunjucks.render(name, [context], [callback]).
+  // nunjucks.render(이름, [컨텍스트], [콜백])을 실행합니다.
   "render": {
-    "name": undefined, // You shouldn't change this.
+    "name": undefined, // 이건 변경하면 안됩니다.
     /**
-     * An object literal containing the data for the template.
-     * If you need to load data from a file, use "options.data" instead.
-     * If you decide to use "options.data" too, this property will be assigned to it.
+     * 템플릿에 대한 데이터를 포함하는 객체 리터럴입니다.
+     * 파일에서 데이터를 로드해야 한다면, 대신 "options.data"를 사용하세요.
+     * "options.data"를 사용하기로 결정했다면, 이 속성은 그것에 할당될 것입니다.
      */
     "context": {},
-    "callback": () => {} // Not modificable.
+    "callback": () => {} // 수정할 수 없습니다.
   }
 
 };

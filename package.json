@@ -1,10 +1,9 @@
 {
     "name": "foundationPureHtml",
-    "version": "2.0.0",
-    "description": "Simple recipes for building and compiling with the CLI.",
+    "version": "1.0.0",
+    "description": "",
     "author": {
-        "name": "Your Name",
-        "url": "https://your-website.com"
+        "name": "Project Name"
     },
     "license": "MIT",
     "repository": {
@@ -19,7 +18,7 @@
         "img": "node img.js",
         "page": "node html.js",
         "build-dirty": "npm-run-all -p js css svg img page",
-        "build": "npm-run-all -s clean build-dirty",
+        "build": "cross-env NODE_ENV=production npm-run-all -s clean build-dirty",
         "watch-css": "chokidar ./src/resource/scss/** -c \"npm run css\"",
         "watch-js": "chokidar ./src/resource/js/** -c \"npm run js\"",
         "watch-svg": "chokidar ./src/resource/image/** -c \"npm run svg\"",
@@ -32,6 +31,7 @@
     "devDependencies": {
         "browser-sync": "^2.26.14",
         "chokidar-cli": "^2.1.0",
+        "cross-env": "^7.0.3",
         "dotenv": "^16.4.5",
         "imagemin-cli": "^6.0.0",
         "imagemin-dir": "^1.0.0-alpha.1",

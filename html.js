@@ -9,8 +9,6 @@ nunjucksToHtml( [ '**/*.njk' ], {
   'flatten': false
 }).then( ( results ) => {
 
-  console.log('## Nunjucks 컴파일 완료')
-
 })
 .catch( ( error ) => {
 

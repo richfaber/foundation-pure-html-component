@@ -17,7 +17,7 @@ const configs = {
 };
 
 // Banner
-const banner = `/*! ${configs.name ? configs.name : pkg.name} v${pkg.version} | (c) ${new Date().getFullYear()} ${pkg.author.name} | ${pkg.license} License | ${pkg.repository.url} */`;
+const banner = `/*! ${configs.name} v${pkg.version} | (c) ${new Date().getFullYear()} ${pkg.author.name} */`;
 
 const createOutput = function (filename, minify) {
 	return configs.formats.map(function (format) {
