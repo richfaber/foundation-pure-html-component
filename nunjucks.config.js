@@ -31,9 +31,9 @@ module.exports = {
         time: (currentDate.getMinutes() < 10) ? "0" + currentDate.getMinutes() : currentDate.getMinutes()
       }
 
-      nunjucksEnv.addGlobal('userEnv', process.env.userEnv);
-      nunjucksEnv.addGlobal('userName', process.env.userName);
-      nunjucksEnv.addGlobal('userEmail', process.env.userEmail);
+      nunjucksEnv.addGlobal('userEnv', process.env.projectUserEnv);
+      nunjucksEnv.addGlobal('userName', process.env.projectUserName);
+      nunjucksEnv.addGlobal('userEmail', process.env.projectUserEmail);
       nunjucksEnv.addGlobal('currentDate', `${dateStr.year}-${dateStr.month}-${dateStr.day} ${dateStr.hour}:${dateStr.time}`);
 
     },
