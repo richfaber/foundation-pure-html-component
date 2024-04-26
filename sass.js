@@ -71,8 +71,10 @@ const parseSass = function (file, minify) {
 };
 
 configs.files.forEach(function (file) {
-    parseSass(file);
+
     if (configs.minify) {
 	    parseSass(file, true);
+    } else {
+      parseSass(file);
     }
 });
