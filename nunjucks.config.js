@@ -1,4 +1,5 @@
 const dotenv = require('dotenv')
+const pkg = require('./package.json')
 
 if (process.env.NODE_ENV === 'production') {
   dotenv.config({ path: '.env.production' })
@@ -31,10 +32,10 @@ module.exports = {
         time: (currentDate.getMinutes() < 10) ? "0" + currentDate.getMinutes() : currentDate.getMinutes()
       }
 
-      nunjucksEnv.addGlobal('userEnv', process.env.projectUserEnv);
-      nunjucksEnv.addGlobal('userName', process.env.projectUserName);
-      nunjucksEnv.addGlobal('userEmail', process.env.projectUserEmail);
-      nunjucksEnv.addGlobal('currentDate', `${dateStr.year}-${dateStr.month}-${dateStr.day} ${dateStr.hour}:${dateStr.time}`);
+      nunjucksEnv.addGlobal('userEnv', process.env.authorUserEnv);
+      nunjucksEnv.addGlobal('pageVersion', pkg.version);
+
+      // nunjucksEnv.addGlobal('currentDate', `${dateStr.year}-${dateStr.month}-${dateStr.day} ${dateStr.hour}:${dateStr.time}`);
 
     },
     /**

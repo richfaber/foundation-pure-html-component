@@ -23,10 +23,10 @@
         "watch-js": "chokidar ./src/resource/js/** -c \"npm run js\"",
         "watch-svg": "chokidar ./src/resource/image/** -c \"npm run svg\"",
         "watch-img": "chokidar ./src/resource/image/** -c \"npm run img\"",
-        "watch-page": "chokidar ./src/page/** -c \"npm run page\"",
+        "watch-page": "chokidar ./src/page/** ./src/layout/** -c \"npm run page\"",
         "watch": "npm-run-all -p watch-css watch-js watch-svg watch-img watch-page",
         "server-start": "browser-sync start --reload-delay 800 --files \"src\" --server \"dist\"",
-        "server": "npm-run-all -p build watch server-start"
+        "server": "npm-run-all -p clean build-dirty watch server-start"
     },
     "devDependencies": {
         "browser-sync": "^2.26.14",
