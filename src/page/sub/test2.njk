@@ -9,3 +9,11 @@
 	<p><button id="click-me">aaa 히히 인제된다. Click Me</button></p>
 
 {% endblock %}
+
+{% block script %}
+<script type="text/javascript">
+(function() {
+	console.log('script 로딩')
+})()
+</script>
+{% endblock %}

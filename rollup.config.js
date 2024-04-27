@@ -1,15 +1,18 @@
 // Plugins
+import babel from 'rollup-plugin-babel';
+import nodeResolve from 'rollup-plugin-node-resolve';
 import { terser } from 'rollup-plugin-terser';
+
 import pkg from './package.json';
 
 
 // Configs
 const configs = {
 	name: 'foundationPureHtml',
-	files: ['main.js', 'detects.js', 'another-file.js'],
+	files: ['polyfill.js', 'detects.js', 'another-file.js'],
 	// formats: ['iife', 'es', 'amd', 'cjs'],
-	formats: ['es'],
-	default: 'es',
+	formats: ['iife'],
+	default: 'iife',
 	pathIn: 'src/resource/js',
 	pathOut: 'dist/resource/js',
 	minify: true,
@@ -31,7 +34,15 @@ const createOutput = function (filename, minify) {
 			output.name = configs.name ? configs.name : pkg.name;
 		}
 		if (minify) {
-			output.plugins = [terser()];
+			output.plugins = [
+				babel(),
+				nodeResolve({
+					// use "jsnext:main" if possible
+					// see https://github.com/rollup/rollup/wiki/jsnext:main
+					jsnext: true
+				}),
+				terser()
+			];
 		}
 
 		output.sourcemap = configs.sourceMap
