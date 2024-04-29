@@ -29,6 +29,9 @@
         "server": "npm-run-all -p clean build-dirty watch server-start"
     },
     "devDependencies": {
+        "@rollup/plugin-alias": "^5.1.0",
+        "@rollup/plugin-commonjs": "^25.0.7",
+        "@rollup/plugin-node-resolve": "^15.2.3",
         "browser-sync": "^2.26.14",
         "chokidar-cli": "^2.1.0",
         "cross-env": "^7.0.3",
@@ -47,7 +50,6 @@
         "rollup": "^2.6.1",
         "rollup-plugin-babel": "^4.4.0",
         "rollup-plugin-multi-input": "^1.4.1",
-        "rollup-plugin-node-resolve": "^5.2.0",
         "rollup-plugin-terser": "^7.0.2",
         "sass": "^1.26.5",
         "svgo": "^1.3.2"
