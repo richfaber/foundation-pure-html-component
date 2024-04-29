@@ -15,6 +15,3 @@ nunjucksToHtml( [ '**/*.njk' ], {
   console.log('error ->\n', error)
 
 });
-
-// Produces the same result as calling:
-// nunjucksToHtml().then((results) => {}).catch((error) => {});

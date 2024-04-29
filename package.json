@@ -12,7 +12,7 @@
     },
     "scripts": {
         "clean": "recursive-delete dist",
-        "js": "rollup --config rollup.config.js",
+        "js": "rollup --config rollup.javascript.js",
         "css": "node sass.js",
         "svg": "svgo -f src dist -r --disable=removeViewBox,removeTitle",
         "img": "node img.js",

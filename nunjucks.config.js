@@ -43,7 +43,9 @@ module.exports = {
      *
      * 쓰기를 건너뛰려면 false를 반환하세요.
      */
-    beforeWrite (destinationFilepath, renderResult) { let nunjucks = this; }
+    beforeWrite (destinationFilepath, renderResult) {
+      let nunjucks = this;
+    }
   },
 
   /**
@@ -58,7 +60,8 @@ module.exports = {
     "options": {
       "autoescape": true,
       "throwOnUndefined": false,
-      // ...
+      "trimBlocks": true,
+      "lstripBlocks": true
     }
   },
 
