@@ -1,12 +1,14 @@
 import path from 'path';
 
-
-// Plugins
+import { terser } from 'rollup-plugin-terser';
 import babel from 'rollup-plugin-babel';
 import commonjs from '@rollup/plugin-commonjs';
+import json from '@rollup/plugin-json';
 import alias from '@rollup/plugin-alias';
 import { nodeResolve } from '@rollup/plugin-node-resolve';
-import { terser } from 'rollup-plugin-terser';
+
+import eslint from '@rollup/plugin-eslint';
+import inject from '@rollup/plugin-inject';
 
 import pkg from './package.json';
 
@@ -14,7 +16,7 @@ import pkg from './package.json';
 const configs = {
   name: 'foundationPureHtml',
   root: 'src',
-  files: [ 'ui-polyfill.js', 'ui-plugin.js', 'another-file.js' ],
+  files: [ 'ui-vendor.js', 'ui-polyfill.js' ],
   // formats: ['iife', 'es', 'amd', 'cjs'],
   formats: [ 'iife' ],
   default: 'iife',
@@ -55,39 +57,43 @@ const createOutput = function ( filename, minify ) {
  */
 const createExport = function ( file ) {
 
-	const plugins = [
-		alias({
-			entries: [
-				{ find: '@', replacement: path.resolve( __dirname, configs.root ) }
-			]
-		}),
-		nodeResolve( {
-			// use "jsnext:main" if possible
-			// see https://github.com/rollup/rollup/wiki/jsnext:main
-			jsnext: true
-		} ),
-		babel( {
-			exclude: 'node_modules/**',
-		} ),
-		commonjs()
-	]
+  const plugins = [
+    alias( {
+      entries: [
+        { find: '@', replacement: path.resolve( __dirname, configs.root ) }
+      ]
+    } ),
+    nodeResolve( {
+      // use "jsnext:main" if possible
+      // see https://github.com/rollup/rollup/wiki/jsnext:main
+      jsnext: true,
+      browser: true
+    } ),
+    commonjs(),
+    eslint( {
+      exclude: [],
+    } ),
+    babel( {
+      exclude: 'node_modules/**',
+    } ),
+    json()
+  ]
 
-	if ( process.env.NODE_ENV === 'production' ) {
+  if ( process.env.NODE_ENV === 'production' ) {
 
-		if ( configs.minify ) {
-			plugins.push( terser() )
-		}
+    if ( configs.minify ) {
+      plugins.push( terser() )
+    }
 
-		plugins.sourcemap = configs.sourceMap
-	}
+  }
 
-	return configs.files.map( function ( file ) {
+  return configs.files.map( function ( file ) {
     const filename = file.replace( '.js', '' );
     return {
       input: `${ configs.pathIn }/${ file }`,
       output: createOutput( filename ),
-			plugins
-		};
+      plugins
+    };
   } );
 };
 

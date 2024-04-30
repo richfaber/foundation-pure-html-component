@@ -1,2 +1,1 @@
-// 크로스 브라우징을 위한 Polyfill
-
+// 크로스 브라우징 Polyfill

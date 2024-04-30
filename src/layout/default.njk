@@ -13,9 +13,10 @@
     {% endblock %}
     <link rel="stylesheet" type="text/css" href="/resource/css/app.min.css?v={{ pkgVersion }}" />
     <!--[if lte IE 8]>
-    <script type="text/javascript" src="js/es5-shim.min.js"></script>
+    <!-- <script type="text/javascript" src="js/es5-shim.min.js"></script> -->
     <![endif]-->
-    <script type="text/javascript" src="/resource/js/polyfill.js"></script>
+    <script type="text/javascript" src="/resource/js/ui-vendor.js"></script>
+    <script type="text/javascript" src="/resource/js/ui-plugin.js"></script>
 </head>
 <body>
 <div class="wrapper" id="app">
