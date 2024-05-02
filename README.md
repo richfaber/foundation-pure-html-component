@@ -1,38 +1,17 @@
-# Build Tool Boilerplate
-A simple boilerplate for using NPM tasks to build and compile JavaScript, CSS, and image files.
+# html + nunjucks + scss + es6 조합 빌드 환경
 
-_Version 2 adds `watch` and `server` tasks, and removes the need for Windows-specific tasks._
+- [build-tool-boilerplate](https://github.com/cferdinandi/build-tool-boilerplate) 참조하여, 재구성함
 
-**Install**
+**사전 설치**
 
 - [Install Node.js.](http://nodejs.org/)
-- [Download the NPM Build Tool Boilerplate.](https://github.com/cferdinandi/build-tool-boilerplate/archive/master.zip)
 
-### refer
+**빌드 하기**
 
-- https://github.com/cferdinandi/build-tool-boilerplate
+1. Run `npm install`.
+2. Run `npm run build`.
 
-
-**Quick Start**
-
-Each task has just one or two dependencies (*except for image optimization*), so I recommend deleting the ones you don't need before running `npm install`. Learn more in [the documentation](#documentation) below.
-
-1. In bash/terminal/command line, `cd` into your project directory.
-2. Run `npm install`.
-3. Run `npm run build`.
-
-
-
-## Documentation
-
-This is a boilerplate that you can use as a starting point for your projects.
-
-[Running Tasks](#running-tasks) · [JavaScript](#javascript) · [Sass => CSS](#sass--css) · [SVG Optimization](#svg-optimization) · [Image Optimization](#image-optimization) · [Copy Files](#copy-files) · [Clean](#clean) · [Complete Build](#complete-build) · [Watch for Changes](#watch-for-changes) · [Server](#server)
-
-
-### Running Tasks
-
-The boilerplate uses the `npm run` command to run tasks. These work on macOS, Linux, and Windows systems.
+### 도구 목록
 
 ```bash
 # Main Tasks
@@ -86,33 +65,10 @@ const configs = {
 };
 ```
 
-A banner is automatically generated from your `package.json` data.
-
-It includes the project name and version, a copyright notice with the current year and the package author name, the license type, and a link to the project repository.
-
-_If a `configs.name` property is included, that will be used. If not, the banner defaults to the `name` property in your `package.json` file._
-
-```js
-// Banner
-const banner = `/*! ${configs.name ? configs.name : pkg.name} v${pkg.version} | (c) ${new Date().getFullYear()} ${pkg.author.name} | ${pkg.license} License | ${pkg.repository.url} */`;
-```
-
 To concatentate multiple files into one, use the ES modules `import` feature.
 
-```js
-// myplugin.js
-// This will compile into /dist/js/myplugin.js, and will include helpers.js, app.js, and event-listeners.js
+### Nunjunks
 
-import * as Helpers from './helpers.js';
-import app from './app.js';
-import './event-listeners.js';
-```
-
-JavaScript files should be in the `src/js` directory. Use this task to run the build.
-
-```bash
-npm run js
-```
 
 _**Note for FireFox users:** ensure that ['Use Source Maps'](https://github.com/cferdinandi/build-tool-boilerplate/issues/7#issuecomment-811432626), and ['Show original sources'](https://github.com/cferdinandi/build-tool-boilerplate/issues/7#issuecomment-811855711) options are enabled in Developer Tools._
 
@@ -212,26 +168,6 @@ Image files should be in the `src/img` directory. Use this task to run the build
 
 ```bash
 npm run img
-```
-
-### Copy Files
-
-The boilerplate uses [recursive-fs](https://github.com/simov/recursive-fs) to provide a cross-OS copying solution. This package is also used for the `clean` task, so only remove it if you're deleting both tasks.
-
-```json
-{
-    "devDependencies": {
-        "recursive-fs": "^2.1.0"
-    }
-}
-```
-
-If you have files you want copied as-is, place them in the `src/copy` directory.
-
-Use this task to run the build.
-
-```bash
-npm run copy
 ```
 
 ### Clean
