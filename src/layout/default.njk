@@ -11,7 +11,7 @@
     {% block pageTitle %}
     <title>pageTitle</title>
     {% endblock %}
-    <link rel="stylesheet" type="text/css" href="/resource/css/app.min.css?v={{ pkgVersion }}" />
+    <link rel="stylesheet" type="text/css" href="/resource/css/app.css?v={{ pkgVersion }}" />
     <!--[if lte IE 8]>
     <!-- <script type="text/javascript" src="js/es5-shim.min.js"></script> -->
     <![endif]-->
@@ -24,8 +24,8 @@
     {% block body %}
         body block
     {% endblock %}
-    {% block script %}
-    {% endblock %}
 </div>
+{% block script %}
+{% endblock %}
 </body>
 </html>
