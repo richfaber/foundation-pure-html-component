@@ -1,7 +1,5 @@
 import path from 'path';
 
-import { terser } from 'rollup-plugin-terser'
-
 import pkg from './package.json'
 import { configs, plugins } from './rollup.configs'
 

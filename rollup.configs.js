@@ -10,6 +10,8 @@ import { terser } from "rollup-plugin-terser";
 
 import pkg from './package.json'
 
+const exclude = ['node_modules/**']
+
 const configs = {
   name: pkg.name,
   root: 'src',
@@ -36,10 +38,10 @@ const plugins = [
   } ),
   commonjs(),
   eslint( {
-    exclude: [],
+    exclude
   } ),
   babel( {
-    exclude: 'node_modules/**',
+    exclude
   } ),
   json()
 ]
@@ -52,4 +54,4 @@ if ( process.env.NODE_ENV === 'production' ) {
 
 }
 
-export { configs, plugins };
+export { configs, plugins, exclude };
