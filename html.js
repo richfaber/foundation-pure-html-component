@@ -20,7 +20,7 @@ const htmlFormat = {
 }
 
 if ( !files[0] || files[0].match( 'src/layout' ) ) {
-  files = glob.sync( prefix + '**/*.njk' ).map( f => f.replace( prefix, '' ) );
+  files = glob.sync( prefix + '**/*.njk' ).map( f => f.replace(/\\/g, '/').replace( prefix, '' ) );
 } else {
   files[0] = files[0].replace( prefix, '' )
 }

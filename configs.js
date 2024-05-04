@@ -19,8 +19,6 @@ const configs = {
   // formats: ['iife', 'es', 'amd', 'cjs'],
   formats: [ 'iife' ],
   default: 'iife',
-  pathIn: '/resource/js',
-  pathOut: '/resource/js',
   minify: true,
   sourceMap: false
 }

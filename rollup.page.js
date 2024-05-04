@@ -6,9 +6,6 @@ configs.files = 'src/resource/js/page/**/*.js'
 // watch 대상파일
 let files = [ process.argv[4] ]
 
-const pathIn = configs.root + configs.pathIn
-const pathOut = configs.dest + configs.pathOut
-
 function createExport() {
 
   if ( !files[0] ) {
@@ -21,7 +18,7 @@ function createExport() {
       input: file,
       output: [
         {
-          file: file.replace( pathIn + '/', pathOut + '/' ),
+          file: file.replace(/\\/g, '/').replace( configs.root + '/resource/js/', configs.dest + '/resource/js/' ),
           format: configs.default,
           sourcemap: (process.env.NODE_ENV !== 'production')
         }
