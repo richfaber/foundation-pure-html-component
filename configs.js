@@ -1,25 +1,26 @@
-import path from "path";
+import path from 'path';
 
-import alias from "@rollup/plugin-alias";
-import { nodeResolve } from "@rollup/plugin-node-resolve";
-import commonjs from "@rollup/plugin-commonjs";
-import eslint from "@rollup/plugin-eslint";
-import babel from "rollup-plugin-babel";
-import json from "@rollup/plugin-json";
-import { terser } from "rollup-plugin-terser";
+import alias from '@rollup/plugin-alias';
+import { nodeResolve } from '@rollup/plugin-node-resolve';
+import commonjs from '@rollup/plugin-commonjs';
+import eslint from '@rollup/plugin-eslint';
+import babel from 'rollup-plugin-babel';
+import json from '@rollup/plugin-json';
+import { terser } from 'rollup-plugin-terser';
 
 import pkg from './package.json'
 
-const exclude = ['node_modules/**']
+const exclude = [ 'node_modules/**' ]
 
 const configs = {
   name: pkg.name,
   root: 'src',
+  dest: 'dist',
   // formats: ['iife', 'es', 'amd', 'cjs'],
   formats: [ 'iife' ],
   default: 'iife',
-  pathIn: 'src/resource/js',
-  pathOut: 'dist/resource/js',
+  pathIn: '/resource/js',
+  pathOut: '/resource/js',
   minify: true,
   sourceMap: false
 }
@@ -31,7 +32,7 @@ const plugins = [
     ]
   } ),
   nodeResolve( {
-    // use "jsnext:main" if possible
+    // use 'jsnext:main' if possible
     // see https://github.com/rollup/rollup/wiki/jsnext:main
     jsnext: true,
     browser: true

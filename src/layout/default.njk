@@ -1,5 +1,5 @@
 <!--
-    @퍼블리셔: {{ authorName }} ({{ authorEmail }}) {{ userEnv }}
+    @퍼블리셔: {{ authorName }} ({{ authorEmail }}){% if userEnv %} {{ userEnv }}{% endif %}
     @버전: v{{ pkgVersion }}
 -->
 <!DOCTYPE html>
@@ -8,19 +8,29 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    {% block pageTitle %}
-    <title>pageTitle</title>
-    {% endblock %}
+
+    {#    <meta property="og:title" content="" />#}
+    {#    <meta property="og:type" content="" />#}
+    {#    <meta property="og:url" content="" />#}
+    {#    <meta property="og:image" content="" />#}
+    {#    <meta property="og:image:alt" content="" />#}
+
+    {#    <link rel="icon" href="/favicon.ico" sizes="any" />#}
+    {#    <link rel="icon" href="/icon.svg" type="image/svg+xml" />#}
+    {#    <link rel="apple-touch-icon" href="icon.png" />#}
+
+    {#    <link rel="manifest" href="site.webmanifest" />#}
+    {#    <meta name="theme-color" content="#fafafa" />    #}
+
+    <title>페이지 제목{% if pageTitle %} - {{ pageTitle }}{% endif %}</title>
     <link rel="stylesheet" type="text/css" href="/resource/css/app.css?v={{ pkgVersion }}" />
-    <!--[if lte IE 8]>
-    <!-- <script type="text/javascript" src="js/es5-shim.min.js"></script> -->
-    <![endif]-->
+
     <script type="text/javascript" src="/resource/js/ui-polyfill.js"></script>
     <script type="text/javascript" src="/resource/js/ui-vendor.js"></script>
 </head>
 <body>
 <div class="skipNavigation"></div>
-<div class="wrapper" id="app">
+<div class="wrapper" id="__APP__">
     <p>LAYOUT 1</p>
     {% block body %}
         body block

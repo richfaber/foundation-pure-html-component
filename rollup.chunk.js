@@ -1,15 +1,18 @@
 import path from 'path';
 
 import pkg from './package.json'
-import { configs, plugins } from './rollup.configs'
+import { configs, plugins } from './configs'
 
 configs.files = [ 'ui-vendor.js', 'ui-polyfill.js' ]
+
+const pathIn = configs.root + configs.pathIn
+const pathOut = configs.dest + configs.pathOut
 
 const createOutput = function ( filename, minify ) {
   return configs.formats.map( function ( format ) {
     const output = {
       // file: `${configs.pathOut}/${filename}${format === configs.default ? '' : `.${format}`}${minify ? '.min' : ''}.js`,
-      file: `${ configs.pathOut }/${ filename }${ format === configs.default ? '' : `.${ format }` }.js`,
+      file: `${ pathOut }/${ filename }${ format === configs.default ? '' : `.${ format }` }.js`,
       format: format,
       sourcemap: ( process.env.NODE_ENV !== 'production' ),
     };
@@ -32,7 +35,7 @@ const createExport = function ( file ) {
   const files = configs.files.map( function ( file ) {
     const filename = file.replace( '.js', '' );
     return {
-      input: `${ configs.pathIn }/${ file }`,
+      input: `${ pathIn }/${ file }`,
       output: createOutput( filename ),
       plugins
     };
