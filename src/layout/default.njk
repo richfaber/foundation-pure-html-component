@@ -23,10 +23,10 @@
     {#    <meta name="theme-color" content="#fafafa" />    #}
 
     <title>페이지 제목{% if pageTitle %} - {{ pageTitle }}{% endif %}</title>
-    <link rel="stylesheet" type="text/css" href="/resource/css/app.css?v={{ pkgVersion }}" />
+    <link rel="stylesheet" type="text/css" href="{{ Host }}/resource/css/app.css?v={{ pkgVersion }}" />
 
-    <script type="text/javascript" src="/resource/js/ui-polyfill.js"></script>
-    <script type="text/javascript" src="/resource/js/ui-vendor.js"></script>
+    <script type="text/javascript" src="{{ Host }}/resource/js/ui-polyfill.js"></script>
+    <script type="text/javascript" src="{{ Host }}/resource/js/ui-vendor.js"></script>
 </head>
 <body>
 <div class="skipNavigation"></div>
