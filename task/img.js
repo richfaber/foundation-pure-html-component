@@ -1,13 +1,13 @@
-const imagemin = require( 'imagemin' );
-const globby = require( 'globby' );
-const path = require( 'path' );
+import imagemin from 'imagemin';
+import globby from 'globby';
+import path from 'path';
 
-const imageminSharp = require( 'imagemin-sharp' );
-// const imageminWebp = require('imagemin-webp');
-const imageminMozjpeg = require( 'imagemin-mozjpeg' );
-const imageminPngcrush = require( 'imagemin-pngcrush' );
-const imageminPngquant = require( 'imagemin-pngquant' );
-const imageminZopfli = require( 'imagemin-zopfli' );
+import imageminSharp from 'imagemin-sharp'
+// const imageminWebp from 'imagemin-webp'
+import imageminMozjpeg from 'imagemin-mozjpeg'
+import imageminPngcrush from 'imagemin-pngcrush'
+import imageminPngquant from 'imagemin-pngquant'
+import imageminZopfli from 'imagemin-zopfli'
 
 const fileInfo = {
   type: "/**/*.{jpg,jpeg,png,gif}",

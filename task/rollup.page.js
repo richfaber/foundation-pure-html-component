@@ -1,5 +1,5 @@
 import glob from 'glob';
-import { configs, plugins } from './configs'
+import { configs, plugins } from '../configs'
 
 configs.files = 'src/resource/js/page/**/*.js'
 

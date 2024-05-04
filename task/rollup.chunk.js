@@ -1,5 +1,5 @@
-import pkg from './package.json'
-import { configs, plugins } from './configs'
+import pkg from '../package.json'
+import { configs, plugins } from '../configs'
 
 configs.files = [ 'ui-vendor.js', 'ui-polyfill.js' ]
 

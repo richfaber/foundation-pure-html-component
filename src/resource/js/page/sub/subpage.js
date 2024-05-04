@@ -1,1 +1,1 @@
-console.log('sample loaded', `jQuery: ${$().jquery}`);
+console.log('Sample loaded', `jQuery: ${$().jquery}`);

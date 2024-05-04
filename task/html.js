@@ -4,7 +4,7 @@ import fs from 'fs'
 
 import { html as beautify } from 'js-beautify';
 
-import { configs } from './configs'
+import { configs } from '../configs'
 
 // watch 대상파일
 let files = [ process.argv[2] ]
@@ -34,8 +34,10 @@ nunjucksToHtml( files, {
   'flatten': false
 } ).then( async ( results ) => {
 
+
   for ( const file of files ) {
-    const filePath = `dist/${ file }`.replace( '.njk', '.html' );
+    const filePath = `${ configs.dest }/${ file }`.replace( '.njk', '.html' );
+
     try {
 
       let htmlContent = await fs.readFileSync( filePath, 'utf8' );
@@ -43,7 +45,7 @@ nunjucksToHtml( files, {
 
       // @TODO: body 내용 중, 태그 안에 있는 HTML 특수문자 처리
       await fs.writeFileSync( filePath, beautifulHtml, 'utf8' );
-      console.log( 'html 컴파일', filePath )
+      console.log( '[html 컴파일]', filePath )
 
     } catch ( error ) {
 

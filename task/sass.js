@@ -1,7 +1,7 @@
 import sass from 'sass'
 import fs from 'fs'
 
-import { configs } from './configs'
+import { configs } from '../configs'
 
 configs.files = [ 'app.scss' ]
 configs.indentType = 'space'
@@ -34,7 +34,7 @@ const writeFile = function ( pathOut, fileName, fileData = true ) {
       fs.writeSync( fd, data, 0, data.length, 0 );
       fs.close( fd, function ( err ) {
         if ( err ) throw err;
-        console.log( `Compiled ${ pathOut }/${ fileName }` );
+        console.log( `[Scss 컴파일] ${ pathOut }/${ fileName }` );
       } )
     } )
   } )
