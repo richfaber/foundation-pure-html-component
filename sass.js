@@ -1,23 +1,16 @@
-const sass = require( 'sass' );
-const fs = require( 'fs' );
-const pkg = require( './package.json' );
+import sass from 'sass'
+import fs from 'fs'
 
-// Configs
-const configs = {
-  name: pkg.name,
-  files: [ 'app.scss' ],
-  pathIn: 'src/resource/scss',
-  pathOut: 'dist/resource/css',
-  indentType: 'space',
-  indentWidth: 2,
-  minify: true,
-  sourceMap: ( process.env.NODE_ENV !== 'production' )
-};
+import { configs } from './configs'
+
+configs.files = [ 'app.scss' ]
+configs.indentType = 'space'
+configs.indentWidth = 2
 
 const getOptions = function ( file, filename, minify ) {
   return {
-    file: `${ configs.pathIn }/${ file }`,
-    outFile: `${ configs.pathOut }/${ filename }`,
+    file: `${ configs.root }/resource/scss/${ file }`,
+    outFile: `${ configs.dest }/resource/css/${ filename }`,
     sourceMap: configs.sourceMap,
     sourceMapContents: configs.sourceMap,
     indentType: configs.indentType,
@@ -51,15 +44,12 @@ const parseSass = function ( file, minify ) {
   const filename = `${ file.slice( 0, file.length - 5 ) }.css`;
   sass.render( getOptions( file, filename, minify ), function ( err, result ) {
 
-    // If there's an error, throw it
     if ( err ) throw err;
 
-    // Write the file
-    writeFile( configs.pathOut, filename, result.css );
+    writeFile( `${ configs.dest }/resource/css/`, filename, result.css );
 
-    if ( configs.sourceMap && !configs.sourceMapEmbed ) {
-      // Write external sourcemap
-      writeFile( configs.pathOut, filename + '.map', result.map, false );
+    if ( configs.sourceMap ) {
+      writeFile( `${ configs.dest }/resource/css/`, filename + '.map', result.map, false );
     }
   } );
 };
@@ -71,4 +61,5 @@ configs.files.forEach( function ( file ) {
   } else {
     parseSass( file );
   }
+
 } );

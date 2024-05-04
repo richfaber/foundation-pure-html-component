@@ -1,4 +1,4 @@
-import glob from 'glob'; // rollup은 파일 패턴 매칭을 지원하지 않으므로 glob 패키지 사용
+import glob from 'glob';
 import { configs, plugins } from './configs'
 
 configs.files = 'src/resource/js/page/**/*.js'
@@ -20,7 +20,7 @@ function createExport() {
         {
           file: file.replace(/\\/g, '/').replace( configs.root + '/resource/js/', configs.dest + '/resource/js/' ),
           format: configs.default,
-          sourcemap: (process.env.NODE_ENV !== 'production')
+          sourcemap: configs.sourceMap
         }
       ],
       plugins

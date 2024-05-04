@@ -14,7 +14,7 @@
         "clean": "recursive-delete dist",
         "js-chunk": "rollup --config rollup.chunk.js",
         "js-page": "rollup --config rollup.page.js",
-        "css": "node sass.js",
+        "css": "babel-node sass.js",
         "svg": "svgo -f src dist -r --disable=removeViewBox,removeTitle",
         "img": "node img.js",
         "html": "babel-node html.js",

@@ -20,7 +20,7 @@ const configs = {
   formats: [ 'iife' ],
   default: 'iife',
   minify: true,
-  sourceMap: false
+  sourceMap: (process.env.NODE_ENV !== 'production')
 }
 
 const plugins = [

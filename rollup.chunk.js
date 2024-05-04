@@ -9,7 +9,7 @@ const createOutput = function ( filename, minify ) {
       // file: `${configs.configs.dest }/resource/js/${filename}${format === configs.default ? '' : `.${format}`}${minify ? '.min' : ''}.js`,
       file: `${ configs.dest }/resource/js/${ filename }${ format === configs.default ? '' : `.${ format }` }.js`,
       format: format,
-      sourcemap: ( process.env.NODE_ENV !== 'production' ),
+      sourcemap: configs.sourceMap
     };
 
     if ( format === 'iife' ) {
