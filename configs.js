@@ -20,7 +20,15 @@ const configs = {
   formats: [ 'iife' ],
   default: 'iife',
   minify: true,
-  sourceMap: (process.env.NODE_ENV !== 'production')
+  sourceMap: (process.env.NODE_ENV !== 'production'),
+  nunjucks: {
+    'config': 'nunjucks.config.js',
+    'dest': 'dist',
+    'ext': '.html',
+    'baseDir': 'src/page',
+    'cwd': process.cwd(),
+    'flatten': false
+  }
 }
 
 const plugins = [

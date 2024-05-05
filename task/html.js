@@ -1,14 +1,10 @@
 import nunjucksToHtml from 'nunjucks-to-html'
-import * as glob from 'glob'
+import globby from 'globby'
 import fs from 'fs'
 
 import { html as beautify } from 'js-beautify';
 
 import { configs } from '../configs'
-
-// watch 대상파일
-let files = [ process.argv[2] ]
-let prefix = `${ configs.root }/page/`
 
 const htmlFormat = {
   indent_size: 2, // 들여쓰기 크기 [4]
@@ -19,43 +15,63 @@ const htmlFormat = {
   indent_empty_lines: false, // 빈라인을 유지할지 여부
 }
 
-if ( !files[0] || files[0].match( 'src/layout' ) ) {
-  files = glob.sync( prefix + '**/*.njk' ).map( f => f.replace(/\\/g, '/').replace( prefix, '' ) );
-} else {
-  files[0] = files[0].replace( prefix, '' )
+let argv = process.argv.slice( 2 )
+let isWatch = !!argv.length
+
+// watch 대상파일
+let files = [ argv[0] ]
+let event = [ argv[1] ] // add, unlink
+let prefix = `${ configs.root }/page/`
+
+function compatiblePath( str ) {
+  return str.replace( /\\/g, '/' )
 }
 
-nunjucksToHtml( files, {
-  'config': 'nunjucks.config.js',
-  'dest': configs.dest,
-  'ext': '.html',
-  'baseDir': 'src/page',
-  'cwd': process.cwd(),
-  'flatten': false
-} ).then( async ( results ) => {
+function compileHtml() {
 
+  nunjucksToHtml( files, configs.nunjucks ).then( async ( results ) => {
 
-  for ( const file of files ) {
-    const filePath = `${ configs.dest }/${ file }`.replace( '.njk', '.html' );
+    for ( const file of files ) {
+      const filePath = `${ configs.dest }/${ file }`.replace( '.njk', '.html' );
 
-    try {
+      try {
 
-      let htmlContent = await fs.readFileSync( filePath, 'utf8' );
-      const beautifulHtml = await beautify( htmlContent, htmlFormat );
+        let htmlContent = await fs.readFileSync( filePath, 'utf8' );
+        const beautifulHtml = await beautify( htmlContent, htmlFormat );
 
-      // @TODO: body 내용 중, 태그 안에 있는 HTML 특수문자 처리
-      await fs.writeFileSync( filePath, beautifulHtml, 'utf8' );
-      console.log( '[html 컴파일]', filePath )
+        // @TODO: body 내용 중, 태그 안에 있는 HTML 특수문자 처리
+        await fs.writeFileSync( filePath, beautifulHtml, 'utf8' );
+        console.log( '[html 컴파일]', filePath )
 
-    } catch ( error ) {
+      } catch ( error ) {
 
-      console.error( `파일 처리 중 오류가 발생했습니다: ${ error }` );
+        console.error( `파일 처리 중 오류가 발생했습니다: ${ error }` );
 
+      }
     }
+
+  } ).catch( ( error ) => {
+
+    console.log( 'error ->\n', error )
+
+  } );
+}
+
+// 감지상태 이고, 레이아웃 파일의 변경이 아닌 경우
+if ( isWatch && !/^src\/layout/.test( files[0] ) ) {
+  console.log(`[html 감지]`, files, event)
+
+  if ( event == 'unlink' ) {
+    process.exit( 1 )
   }
 
-} ).catch( ( error ) => {
+  files[0] = compatiblePath( files[0] ).replace( prefix, '' )
+  compileHtml()
 
-  console.log( 'error ->\n', error )
+} else {
 
-} );
+  globby( prefix + '**/*.njk', { nodir: true } ).then( filePaths => {
+    files = filePaths.map( filePath => filePath.replace( prefix, '' ) )
+  } ).then( compileHtml )
+
+}
