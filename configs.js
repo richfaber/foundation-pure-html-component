@@ -8,11 +8,12 @@ import babel from 'rollup-plugin-babel'
 import json from '@rollup/plugin-json'
 import { terser } from 'rollup-plugin-terser'
 
-import imageminSharp from "imagemin-sharp"
-import imageminMozjpeg from "imagemin-mozjpeg"
-import imageminPngcrush from "imagemin-pngcrush"
-import imageminPngquant from "imagemin-pngquant"
-import imageminZopfli from "imagemin-zopfli"
+import imageminSharp from 'imagemin-sharp' // imagemin-svgo 병목
+import imageminMozjpeg from 'imagemin-mozjpeg'
+import imageminPngcrush from 'imagemin-pngcrush'
+import imageminPngquant from 'imagemin-pngquant'
+import imageminZopfli from 'imagemin-zopfli'
+import imageminSvgo from 'imagemin-svgo'
 
 import pkg from './package.json'
 
@@ -49,7 +50,7 @@ configs.html = {
 }
 
 configs.img = {
-  type: "/**/*.{jpg,jpeg,png,gif}",
+  type: "/**/*.{jpg,jpeg,png,gif,svg}",
   src: configs.root + "/resource/image",
   dest: configs.dest + '/resource/image'
 }
@@ -78,12 +79,18 @@ const plugins = {
   ],
 
   img: [
-    imageminSharp(),
+    imageminSvgo( {
+      plugins: [{
+        name: 'removeViewBox',
+        active: true
+      }]
+    } ),
+    // imageminSharp(),
     // imageminWebp({ quality: 80 }),
     imageminMozjpeg(),
     imageminPngcrush(),
     imageminPngquant(),
-    imageminZopfli()
+    imageminZopfli(),
   ]
 
 }

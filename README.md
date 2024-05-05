@@ -286,16 +286,3 @@ It also allows you to run tasks in parallel. By running all of the tasks in the 
 
 **In other words, don't remove this dependency.**
 
-
-
-## Why does this exist?
-
-For years, I've been an avid [Gulp](https://gulpjs.com/) user. Gulp is great. But it's also *a lot*.
-
-**I wanted a simpler, more resilient, leaner set of build tools.**
-
-I'm tired of having to repair my build anytime I don't use it for a few months. I'm tired of installing 270mb of `node_modules` dependencies to build a simple website or web app.
-
-With NPM, you can build a simplish build tool that does just what you want (*and nothing more*) with a fraction of the footprint.
-
-❤️ *Major kudos to Keith Cirkel for [teaching me about this years ago](https://www.keithcirkel.co.uk/how-to-use-npm-as-a-build-tool/), before I was ready to hear it.*
