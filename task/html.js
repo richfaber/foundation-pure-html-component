@@ -3,6 +3,8 @@ import globby from 'globby'
 import fs from 'fs'
 
 import { html as beautify } from 'js-beautify';
+import html from "@html-eslint/eslint-plugin";
+import parser from "@html-eslint/parser";
 
 import { configs } from '../configs'
 
@@ -28,10 +30,16 @@ function compileHtml() {
       try {
 
         let htmlContent = await fs.readFileSync( filePath, 'utf8' );
-        const beautifulHtml = await beautify( htmlContent, configs.html.format );
+        htmlContent = await beautify( htmlContent, configs.html.format );
 
-        // @TODO: body 내용 중, 태그 안에 있는 HTML 특수문자 처리
-        await fs.writeFileSync( filePath, beautifulHtml, 'utf8' );
+        // @TODO: 페이지 내의 src="" 의 경로를 상대경로로 변경 필요
+
+        // @TODO: body 내용 중, 태그 안에 있는 HTML 특수문자 처리 필요
+
+        // lint html
+        console.log(parser(htmlContent))
+
+        await fs.writeFileSync( filePath, htmlContent, 'utf8' );
         console.log( '[html 컴파일]', filePath )
 
       } catch ( error ) {

@@ -36,7 +36,7 @@ module.exports = {
       nunjucksEnv.addGlobal('pkgVersion', pkg.version);
       nunjucksEnv.addGlobal('Host', process.env.HOST);
 
-      // nunjucksEnv.addGlobal('currentDate', `${dateStr.year}-${dateStr.month}-${dateStr.day} ${dateStr.hour}:${dateStr.time}`);
+      nunjucksEnv.addGlobal('currentDate', `${dateStr.year}-${dateStr.month}-${dateStr.day} ${dateStr.hour}:${dateStr.time}`);
 
     },
     /**
