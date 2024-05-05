@@ -2,23 +2,12 @@ import imagemin from 'imagemin';
 import globby from 'globby';
 import path from 'path';
 
-import imageminSharp from 'imagemin-sharp'
-// const imageminWebp from 'imagemin-webp'
-import imageminMozjpeg from 'imagemin-mozjpeg'
-import imageminPngcrush from 'imagemin-pngcrush'
-import imageminPngquant from 'imagemin-pngquant'
-import imageminZopfli from 'imagemin-zopfli'
+import { configs, plugins } from '../configs'
 
-const fileInfo = {
-  type: "/**/*.{jpg,jpeg,png,gif}",
-  src: "src/resource/image",
-  dest: 'dist/resource/image'
-}
-
-globby( fileInfo.src + fileInfo.type, { nodir: true } ).then( filePaths => {
+globby( configs.img.src + configs.img.type, { nodir: true } ).then( filePaths => {
   filePaths.forEach( filePath => {
     const fileDir = path.dirname( filePath );
-    doCompress( filePath, fileDir.replace( fileInfo.src, fileInfo.dest ) );
+    doCompress( filePath, fileDir.replace( configs.img.src, configs.img.dest ) );
   } )
 } );
 
@@ -26,16 +15,15 @@ function doCompress( srcFile, outDir ) {
 
   imagemin( [ srcFile ], {
     destination: outDir,
-    plugins: [
-      imageminSharp(),
-      // imageminWebp({ quality: 80 }),
-      imageminMozjpeg(),
-      imageminPngcrush(),
-      imageminPngquant(),
-      imageminZopfli()
-    ]
+    plugins: plugins.img
   } ).then( ( files ) => {
+
     console.log( `[이미지압축] ${ srcFile } -> ${ files[0].destinationPath }` )
-  } );
+
+  } ).catch( err => {
+
+    console.log( `[이미지압축 error]: ${ err }` )
+
+  } )
 
 }

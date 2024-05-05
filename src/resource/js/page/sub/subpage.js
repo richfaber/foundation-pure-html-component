@@ -1,1 +1,4 @@
-console.log('Sample loaded', `jQuery: ${$().jquery}`);
+document.addEventListener( 'DOMContentLoaded', () => {
+  console.log( 'Sample loaded', `jQuery: ${ $().jquery }` )
+} )
+

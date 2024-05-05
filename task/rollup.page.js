@@ -23,7 +23,7 @@ function createExport() {
           sourcemap: configs.sourceMap
         }
       ],
-      plugins
+      plugins: plugins.js
     }
 
     return output;

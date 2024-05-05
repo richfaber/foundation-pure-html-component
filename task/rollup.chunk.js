@@ -32,7 +32,7 @@ const createExport = function ( file ) {
     return {
       input: `${ configs.root }/resource/js/${ file }`,
       output: createOutput( filename ),
-      plugins
+      plugins: plugins.js
     };
   } );
 
