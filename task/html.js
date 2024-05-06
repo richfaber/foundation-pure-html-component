@@ -3,9 +3,6 @@ import globby from 'globby'
 import fs from 'fs'
 
 import { html as beautify } from 'js-beautify';
-import html from "@html-eslint/eslint-plugin";
-import parser from "@html-eslint/parser";
-
 import { configs } from '../configs'
 
 let argv = process.argv.slice( 2 )
@@ -37,7 +34,7 @@ function compileHtml() {
         // @TODO: body 내용 중, 태그 안에 있는 HTML 특수문자 처리 필요
 
         // lint html
-        console.log(parser(htmlContent))
+        // console.log(parser(htmlContent))
 
         await fs.writeFileSync( filePath, htmlContent, 'utf8' );
         console.log( '[html 컴파일]', filePath )
