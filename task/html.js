@@ -1,6 +1,7 @@
 import nunjucksToHtml from 'nunjucks-to-html'
 import globby from 'globby'
 import fs from 'fs'
+import path from 'path'
 
 import { html as beautify } from 'js-beautify';
 import { configs } from '../configs'
@@ -17,6 +18,28 @@ function compatiblePath( str ) {
   return str.replace( /\\/g, '/' )
 }
 
+function convertSrcToRelativePath(htmlContent, currentFilePath) {
+
+  htmlContent = htmlContent.replace(/(?:src|href)="(.*?)"|'(.*?)'/g, (match, p1, p2) => {
+    const srcPath = p1 || p2; // p1, p2 중 하나는 undefined 일 것입니다.
+    if (!srcPath) return match; // src 경로가 없으면 변경하지 않습니다.
+
+    let relativeSrcPath = path.relative(path.dirname(currentFilePath), configs.dest)
+    let resourcePath = (!relativeSrcPath) ? srcPath.replace(/^\//g, '') : srcPath
+    let type = 'src'
+
+    switch(true) {
+      case /\/css\//g.test(srcPath):
+        type = 'href'
+        break;
+    }
+
+    return `${type}="${relativeSrcPath}${resourcePath}"`;
+  });
+
+  return htmlContent;
+}
+
 function compileHtml() {
 
   nunjucksToHtml( files, configs.html.nunjucks ).then( async ( results ) => {
@@ -29,11 +52,11 @@ function compileHtml() {
         let htmlContent = await fs.readFileSync( filePath, 'utf8' );
         htmlContent = await beautify( htmlContent, configs.html.format );
 
-        // @TODO: 페이지 내의 src="" 의 경로를 상대경로로 변경 필요
+        if(configs.html.relativePath) htmlContent = convertSrcToRelativePath(htmlContent, filePath);
 
         // @TODO: body 내용 중, 태그 안에 있는 HTML 특수문자 처리 필요
 
-        // lint html
+        // @TODO: lint html
         // console.log(parser(htmlContent))
 
         await fs.writeFileSync( filePath, htmlContent, 'utf8' );

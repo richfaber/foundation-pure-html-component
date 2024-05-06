@@ -46,7 +46,8 @@ configs.html = {
     preserve_newlines: false, // 기존 줄바꿈 유지
     indent_inner_html: false, // <head> 및 <body> 섹션을 들여씀
     indent_empty_lines: false, // 빈라인을 유지할지 여부
-  }
+  },
+  relativePath: true // 상대경로 변환 여부
 }
 
 configs.css = {
