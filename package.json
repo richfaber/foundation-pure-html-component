@@ -2,13 +2,10 @@
     "name": "foundationPureHtml",
     "version": "1.0.0",
     "description": "",
-    "author": {
-        "name": "Project Name"
-    },
     "license": "MIT",
     "repository": {
         "type": "git",
-        "url": "http://github.com/cferdinandi/build-tools-boilerplate"
+        "url": "http://github.com/richfaber/foundation-pure-html"
     },
     "scripts": {
         "clean": "recursive-delete dist",
