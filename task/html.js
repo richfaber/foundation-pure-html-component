@@ -66,7 +66,7 @@ if ( isWatch && !/^src\/layout/.test( files[0] ) ) {
 
 } else {
 
-  globby( prefix + '**/*.njk', { nodir: true } ).then( filePaths => {
+  globby( prefix + '**/*.njk', { } ).then( filePaths => {
     files = filePaths.map( filePath => filePath.replace( prefix, '' ) )
   } ).then( compileHtml )
 

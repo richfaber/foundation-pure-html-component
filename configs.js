@@ -26,7 +26,7 @@ const configs = {
   // formats: ['iife', 'es', 'amd', 'cjs'],
   formats: [ 'iife' ],
   default: 'iife',
-  minify: true,
+  minify: (process.env.NODE_ENV === 'production'),
   sourceMap: (process.env.NODE_ENV !== 'production')
 }
 
@@ -41,7 +41,7 @@ configs.html = {
   },
   format: {
     indent_size: 2, // 들여쓰기 크기 [4]
-    indent_char: " ", // 들여쓰기 문자 [" "]
+    indent_char: ' ', // 들여쓰기 문자 [' ']
     end_with_newline: false, // 마지막에 새로운 줄 시작
     preserve_newlines: false, // 기존 줄바꿈 유지
     indent_inner_html: false, // <head> 및 <body> 섹션을 들여씀
@@ -49,9 +49,20 @@ configs.html = {
   }
 }
 
+configs.css = {
+  chunk: ['/resource/scss/app.scss'],
+  src: configs.root + '/resource/scss',
+  dest: configs.dest + '/resource/scss',
+  sourceMap: configs.sourceMap,
+  sourceMapContents: configs.sourceMap,
+  indentType: 'space',
+  indentWidth: 2,
+  outputStyle: configs.minify ? 'compressed' : 'expanded'
+}
+
 configs.img = {
-  type: "/**/*.{jpg,jpeg,png,gif,svg}",
-  src: configs.root + "/resource/image",
+  type: '/**/*.{jpg,jpeg,png,gif,svg}',
+  src: configs.root + '/resource/image',
   dest: configs.dest + '/resource/image'
 }
 

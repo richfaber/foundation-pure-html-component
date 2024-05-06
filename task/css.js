@@ -1,65 +1,101 @@
 import sass from 'sass'
+import aliasImporter from 'node-sass-alias-importer'
+
 import fs from 'fs'
+import globby from 'globby'
+import path from 'path'
 
 import { configs } from '../configs'
 
-configs.files = [ 'app.scss' ]
-configs.indentType = 'space'
-configs.indentWidth = 2
+let argv = process.argv.slice( 2 )
+let isWatch = !!argv.length
 
-const getOptions = function ( file, filename, minify ) {
-  return {
-    file: `${ configs.root }/resource/scss/${ file }`,
-    outFile: `${ configs.dest }/resource/css/${ filename }`,
-    sourceMap: configs.sourceMap,
-    sourceMapContents: configs.sourceMap,
-    indentType: configs.indentType,
-    indentWidth: configs.indentWidth,
-    outputStyle: minify ? 'compressed' : 'expanded'
-  };
-};
+// watch 대상파일
+let files = [ argv[0] ]
+let event = [ argv[1] ] // add, unlink
 
-const writeFile = function ( pathOut, fileName, fileData = true ) {
+function compatiblePath( str ) {
+  return str.replace( /\\/g, '/' )
+}
+
+
+function writeFile( pathOut, fileName, fileData = true ) {
   // Create the directory path
   fs.mkdir( pathOut, { recursive: true }, function ( err ) {
     // If there's an error, throw it
     if ( err ) throw err;
 
     // Write the file to the path
-    fs.writeFile( `${ pathOut }/${ fileName }`, fileData, function ( err ) {
+    fs.writeFile( `${ pathOut }${ fileName }`, fileData, function ( err ) {
       if ( err ) throw err;
 
-      const data = fs.readFileSync( `${ pathOut }/${ fileName }` );
-      const fd = fs.openSync( `${ pathOut }/${ fileName }`, 'w+' );
+      const data = fs.readFileSync( `${ pathOut }${ fileName }` );
+      const fd = fs.openSync( `${ pathOut }${ fileName }`, 'w+' );
       fs.writeSync( fd, data, 0, data.length, 0 );
       fs.close( fd, function ( err ) {
         if ( err ) throw err;
-        console.log( `[Scss 컴파일] ${ pathOut }/${ fileName }` );
+        console.log( `[Scss 컴파일] ${ pathOut }${ fileName }` );
       } )
     } )
   } )
 }
 
-const parseSass = function ( file, minify ) {
-  const filename = `${ file.slice( 0, file.length - 5 ) }.css`;
-  sass.render( getOptions( file, filename, minify ), function ( err, result ) {
+function parseSass( srcFiles ) {
 
-    if ( err ) throw err;
+  srcFiles.forEach( srcFile => {
 
-    writeFile( `${ configs.dest }/resource/css/`, filename, result.css );
+    const outFile = compatiblePath(srcFile)
+      .replace( /^src/g, configs.dest )
+      .replace( /\/scss\//g, '/css/' )
+      .replace( /.scss$/g, '.css' )
 
-    if ( configs.sourceMap ) {
-      writeFile( `${ configs.dest }/resource/css/`, filename + '.map', result.map, false );
-    }
-  } );
-};
+    const outFileName = outFile.match(/[^/]+$/)[0]
+    const outFilePath = outFile.match(/^(.*\/)[^/]+$/)[1]
 
-configs.files.forEach( function ( file ) {
+    sass.render( {
+      file: srcFile,
+      outFile: outFile,
+      importer: [
+        aliasImporter({
+          '@' : './src',
+          define: './src/resource/scss/define'
+        })
+      ],
+      ...configs.css
+    }, function ( err, result ) {
 
-  if ( configs.minify ) {
-    parseSass( file, true );
-  } else {
-    parseSass( file );
+      if ( err ) throw err;
+
+      writeFile( outFilePath, outFileName, result.css );
+
+      if ( configs.sourceMap ) {
+        writeFile( outFilePath, outFileName + '.map', result.map, false );
+      }
+    } )
+
+  } )
+
+}
+
+if ( isWatch ) {
+  console.log( `[css 감지]`, files, event )
+
+  if ( event == 'unlink' ) {
+    process.exit( 1 )
   }
 
-} );
+  // 파일명이 '_' 인 경우
+  if ( /\/_([^\/]+)$/.test(files[0]) ) {
+    files = configs.css.chunk
+    console.log(`>> '_' 파일은 import 대상으로, 컴파일 제외`)
+  }
+
+  parseSass( files )
+
+} else {
+
+  globby( `${ configs.root }/resource/scss/**/!(_*).scss`, {} ).then( files => {
+    parseSass( files )
+  })
+
+}

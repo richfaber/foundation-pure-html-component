@@ -1,0 +1,7 @@
+@use "define/variable";
+
+div {
+  background: variable.$서브페이지;
+}
+
+

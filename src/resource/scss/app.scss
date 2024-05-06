@@ -1,7 +1,8 @@
-//@import "components/base";
+@use "define/variable";
+//@forward
 
 p {
-  background: green;
+  background: variable.$배경색;
 }
 
 body {
