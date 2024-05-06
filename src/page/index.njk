@@ -1,15 +1,20 @@
-{% set authorName = "이희원" %}
-{% set authorEmail = "richready2011@gmail.com" %}
-{% set pageTitle = "서브페이지" %}
-
 {% extends "layout/default.njk" %}
 
+{% set 제작자 = "이희원" %}
+{% set 이메일 = "userEmail@domain.com" %}
+{% set 페이지아이디 = "main" %}
+{% set 페이지타이틀 = "서브페이지" %}
+
+{% block pageCss %}
+<link rel="stylesheet" type="text/css" href="/resource/css/page/{{ 페이지아이디 }}.css" />
+{% endblock %}
+
 {% block script %}
-    <script type="text/javascript" src="/resource/js/page/sub/subpage.js"></script>
+<script type="text/javascript" src="/resource/js/page/{{ 페이지아이디 }}.js"></script>
 {% endblock %}
 
 {% block body %}
 
-    Index
+INDEX
 
 {% endblock %}

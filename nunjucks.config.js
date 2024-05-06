@@ -32,11 +32,11 @@ module.exports = {
         time: (currentDate.getMinutes() < 10) ? "0" + currentDate.getMinutes() : currentDate.getMinutes()
       }
 
-      nunjucksEnv.addGlobal('userEnv', process.env.authorUserEnv);
-      nunjucksEnv.addGlobal('pkgVersion', pkg.version);
-      nunjucksEnv.addGlobal('Host', process.env.HOST);
+      nunjucksEnv.addGlobal('사용자환경', process.env.authorUserEnv);
+      nunjucksEnv.addGlobal('버전', pkg.version);
+      // nunjucksEnv.addGlobal('Host', process.env.HOST);
 
-      nunjucksEnv.addGlobal('currentDate', `${dateStr.year}-${dateStr.month}-${dateStr.day} ${dateStr.hour}:${dateStr.time}`);
+      nunjucksEnv.addGlobal('현재시간', `${dateStr.year}-${dateStr.month}-${dateStr.day} ${dateStr.hour}:${dateStr.time}`);
 
     },
     /**

@@ -1,5 +1,5 @@
-<!-- @퍼블리셔: {{ authorName }} ({{ authorEmail }}){% if userEnv %} {{ userEnv }}{% endif %} -->
-<!-- @버전: v{{ pkgVersion }} ({{ currentDate }}) -->
+<!-- @퍼블리셔: {{ 제작자 }} ({{ 이메일 }}){% if 사용자환경 %} {{ 사용자환경 }}{% endif %} -->
+<!-- @버전: v{{ 버전 }} ({{ 현재시간 }}) -->
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -20,13 +20,13 @@
     {#    <link rel="manifest" href="site.webmanifest" />#}
     {#    <meta name="theme-color" content="#fafafa" />    #}
 
-    <title>페이지 제목{% if pageTitle %} - {{ pageTitle }}{% endif %}</title>
-    <link rel="stylesheet" type="text/css" href="/resource/css/app.css?v={{ pkgVersion }}" />
+    <title>페이지 제목{% if 페이지타이틀 %} - {{ 페이지타이틀 }}{% endif %}</title>
+    <link rel="stylesheet" type="text/css" href="/resource/css/app.css?v={{ 버전 }}" />
     {% block pageCss %}
     {% endblock %}
 
-    <script type="text/javascript" src="/resource/js/ui-polyfill.js?v={{ pkgVersion }}"></script>
-    <script type="text/javascript" src="/resource/js/ui-vendor.js?v={{ pkgVersion }}"></script>
+    <script type="text/javascript" src="/resource/js/ui-polyfill.js?v={{ 버전 }}"></script>
+    <script type="text/javascript" src="/resource/js/ui-vendor.js?v={{ 버전 }}"></script>
 </head>
 <body>
 <div class="skipNavigation"></div>
