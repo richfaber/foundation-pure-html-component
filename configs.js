@@ -113,6 +113,7 @@ const plugins = {
         '@': './src/resource/scss',
         'common': './src/resource/scss/common',
         'define': './src/resource/scss/define',
+        'layout': './src/resource/scss/layout',
         'vendor': './src/resource/scss/vendor'
       } )
     ],

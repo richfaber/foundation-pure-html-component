@@ -1,8 +1,13 @@
 @charset "UTF-8";
 
+// 기본변수, 함수
 @import "import";
 
-@import "common/reset";
-@import "common/common";
+@import "base/reset";
+@import "base/common";
 
-//.animation { transition-timing-function: cubic-bezier('easeOutSine'); }
+@import "layout/default";
+@import "layout/full";
+
+@import "common/button";
+@import "common/form";
