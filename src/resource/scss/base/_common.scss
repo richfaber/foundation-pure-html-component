@@ -1,24 +1,15 @@
 @charset "UTF-8";
 
 html {
-  height: 100%;
 }
 
 body {
-  margin: 0;
-  word-break: break-word;
-  height: 100%;
-
+  //word-break: break-word;
   color: $기본글꼴색상;
   font-family: $기본글꼴;
   font-size: $기본글꼴크기;
   font-weight: $폰트regular;
   background-color: $기본배경색상;
-
-  & > #__nuxt {
-    height: 100%;
-  }
-
 }
 
 a {
@@ -53,4 +44,3 @@ hr.divide {
   margin: 30px 0;
   border: 0;
 }
-
