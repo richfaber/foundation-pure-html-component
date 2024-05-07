@@ -21,7 +21,8 @@
         "watch-js-page": "chokidar ./src/resource/js/page/**/* -c \"npm run js-page\"",
         "watch-img": "chokidar ./src/resource/image/** -c \"npm run img -- {path} {event}\"",
         "watch-html": "chokidar ./src/page/** ./src/layout/** -c \"npm run html -- {path} {event}\"",
-        "watch": "npm-run-all -p watch-css watch-js-chunk watch-js-page watch-img watch-html",
+        "watch-htmllint": "chokidar ./dist/**/*.html -c \"html-validate {path}\"",
+        "watch": "npm-run-all -p watch-css watch-js-chunk watch-js-page watch-img watch-html watch-htmllint",
         "server-start": "browser-sync start --reload-delay 800 --files \"src\" --server \"dist\"",
         "server": "npm-run-all -p clean build-dirty watch server-start"
     },
@@ -42,6 +43,7 @@
         "cross-env": "^7.0.3",
         "dotenv": "^16.4.5",
         "glob": "^10.3.12",
+        "html-validate": "^8.18.2",
         "imagemin-cli": "^6.0.0",
         "imagemin-dir": "^1.0.0-alpha.1",
         "imagemin-mozjpeg": "^8.0.0",
