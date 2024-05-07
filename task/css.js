@@ -1,11 +1,9 @@
 import sass from 'sass'
-import aliasImporter from 'node-sass-alias-importer'
 
 import fs from 'fs'
 import globby from 'globby'
-import path from 'path'
 
-import { configs } from '../configs'
+import { configs, plugins } from '../configs'
 
 let argv = process.argv.slice( 2 )
 let isWatch = !!argv.length
@@ -55,12 +53,7 @@ function parseSass( srcFiles ) {
     sass.render( {
       file: srcFile,
       outFile: outFile,
-      importer: [
-        aliasImporter({
-          '@' : './src',
-          define: './src/resource/scss/define'
-        })
-      ],
+      importer: plugins.scss.importer,
       ...configs.css
     }, function ( err, result ) {
 

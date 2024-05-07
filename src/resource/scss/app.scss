@@ -1,10 +1,8 @@
-@use "define/variable";
-//@forward
+@charset "UTF-8";
 
-p {
-  background: variable.$배경색;
-}
+@import "import";
 
-body {
-  background: pink;
-}
+@import "common/reset";
+@import "common/common";
+
+//.animation { transition-timing-function: cubic-bezier('easeOutSine'); }

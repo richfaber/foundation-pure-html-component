@@ -15,6 +15,8 @@ import imageminPngquant from 'imagemin-pngquant'
 import imageminZopfli from 'imagemin-zopfli'
 import imageminSvgo from 'imagemin-svgo'
 
+import aliasImporter from 'node-sass-alias-importer'
+
 import pkg from './package.json'
 
 const exclude = [ 'node_modules/**' ]
@@ -58,7 +60,7 @@ configs.css = {
   sourceMapContents: configs.sourceMap,
   indentType: 'space',
   indentWidth: 2,
-  outputStyle: configs.minify ? 'compressed' : 'expanded'
+  outputStyle: configs.minify ? 'compressed' : 'expanded',
 }
 
 configs.img = {
@@ -103,7 +105,18 @@ const plugins = {
     imageminPngcrush(),
     imageminPngquant(),
     imageminZopfli(),
-  ]
+  ],
+
+  scss: {
+    importer: [
+      aliasImporter( {
+        '@': './src/resource/scss',
+        'common': './src/resource/scss/common',
+        'define': './src/resource/scss/define',
+        'vendor': './src/resource/scss/vendor'
+      } )
+    ],
+  }
 
 }
 

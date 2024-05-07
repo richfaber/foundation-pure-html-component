@@ -1,7 +1,9 @@
-@use "define/variable";
+@charset "UTF-8";
+
+@import "@/import";
 
 div {
-  background: variable.$서브페이지;
+  font-family: $기본글꼴;
 }
 
 
