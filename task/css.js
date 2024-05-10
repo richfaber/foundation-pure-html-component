@@ -78,12 +78,12 @@ if ( isWatch ) {
   }
 
   // 파일명이 '_' 인 경우
-  if ( /\/_([^\/]+)$/.test(files[0]) ) {
+  if ( /_[^\/]*?\.*$/.test(files[0]) ) {
     files = configs.css.chunk
     console.log(`>> '_' 파일은 import 대상으로, 컴파일 제외`)
   }
 
-  parseSass( files )
+  parseSass( files.map(file => `${ configs.root }${file}`) )
 
 } else {
 

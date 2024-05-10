@@ -40,7 +40,7 @@ configs.html = {
     'config': 'nunjucks.config.js',
     'dest': configs.dest,
     'ext': '.html',
-    'baseDir': configs.root + '/page',
+    'baseDir': configs.root,
     'cwd': process.cwd(),
     'flatten': false,
   },

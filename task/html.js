@@ -24,8 +24,8 @@ function convertSrcToRelativePath(htmlContent, currentFilePath) {
     const srcPath = p1 || p2; // p1, p2 중 하나는 undefined 일 것입니다.
     if (!srcPath) return match; // src 경로가 없으면 변경하지 않습니다.
 
-    let relativeSrcPath = path.relative(path.dirname(currentFilePath), configs.dest)
-    let resourcePath = (!relativeSrcPath) ? srcPath.replace(/^\//g, '') : srcPath
+    let relativeSrcPath = path.relative(path.dirname(currentFilePath), configs.dest).replace(/\\/g, '/')
+    let resourcePath = (relativeSrcPath) ? srcPath : srcPath.replace(/^\//g, '')
     let type = 'src'
 
     switch(true) {
@@ -57,8 +57,6 @@ function compileHtml() {
         // @TODO: body 내용 중, 태그 안에 있는 HTML 특수문자 처리 필요
 
         // @TODO: lint html
-        // console.log(parser(htmlContent))
-
         await fs.writeFileSync( filePath, htmlContent, 'utf8' );
         console.log( '[html 컴파일]', filePath )
 
@@ -84,13 +82,13 @@ if ( isWatch && !/^src\/layout/.test( files[0] ) ) {
     process.exit( 1 )
   }
 
-  files[0] = compatiblePath( files[0] ).replace( prefix, '' )
+  files[0] = compatiblePath( files[0] ).replace( 'src/', '' )
   compileHtml()
 
 } else {
 
-  globby( prefix + '**/*.njk', { } ).then( filePaths => {
-    files = filePaths.map( filePath => filePath.replace( prefix, '' ) )
+  globby( [`${ configs.root }/**/*.njk`, `!${ configs.root }/layout/**`] ).then( filePaths => {
+    files = filePaths.map( filePath => filePath.replace( 'src/', '' ) )
   } ).then( compileHtml )
 
 }
