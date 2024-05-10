@@ -29,7 +29,10 @@ const configs = {
   formats: [ 'iife' ],
   default: 'iife',
   minify: (process.env.NODE_ENV === 'production'),
-  sourceMap: (process.env.NODE_ENV !== 'production')
+  sourceMap: (process.env.NODE_ENV !== 'production'),
+  port: {
+    dev: 10222
+  }
 }
 
 configs.html = {
@@ -53,7 +56,7 @@ configs.html = {
 }
 
 configs.css = {
-  chunk: ['/resource/scss/app.scss'],
+  chunk: [ '/resource/scss/app.scss' ],
   src: configs.root + '/resource/scss',
   dest: configs.dest + '/resource/scss',
   sourceMap: configs.sourceMap,
@@ -94,10 +97,10 @@ const plugins = {
 
   img: [
     imageminSvgo( {
-      plugins: [{
+      plugins: [ {
         name: 'removeViewBox',
         active: true
-      }]
+      } ]
     } ),
     // imageminSharp(),
     // imageminWebp({ quality: 80 }),

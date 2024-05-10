@@ -24,7 +24,7 @@
         "watch-html": "chokidar ./src/page/** ./src/layout/** -c \"npm run html -- {path} {event}\"",
         "watch-html-lint": "chokidar ./dist/**/*.html -c \"html-validate {path}\"",
         "watch": "npm-run-all -p watch-css watch-js-chunk watch-js-page watch-img watch-html watch-html-lint",
-        "server-start": "browser-sync start --reload-delay 800 --files \"src\" --server \"dist\"",
+        "server-start": "babel-node task/server",
         "server": "npm-run-all -p clean build-dirty watch server-start"
     },
     "devDependencies": {
