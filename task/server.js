@@ -5,7 +5,12 @@ import { configs } from '../configs'
 browserSync({
   port: configs.port.dev,
   // reloadDelay: 1000,
-  files: "./src",
+  files: [{
+    match: ["./dist/**"],
+    fn: function (event, file) {
+      this.reload()
+    }
+  }],
   server: "./dist",
   browser: ["iexplore"],
   watch: true
