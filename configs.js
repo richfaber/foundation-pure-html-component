@@ -35,6 +35,12 @@ const configs = {
   }
 }
 
+configs.js = {
+  chunk: [ 'ui-vendor.js', 'ui-polyfill.js' ],
+  src: `${ configs.root }/resource/js`,
+  dest: `${ configs.dest }/resource/js`
+}
+
 configs.html = {
   nunjucks: {
     'config': 'nunjucks.config.js',
@@ -57,8 +63,8 @@ configs.html = {
 
 configs.css = {
   chunk: [ '/resource/scss/app.scss' ],
-  src: configs.root + '/resource/scss',
-  dest: configs.dest + '/resource/scss',
+  src: `${ configs.root }/resource/scss`,
+  dest: `${ configs.dest }/resource/scss`,
   sourceMap: configs.sourceMap,
   sourceMapContents: configs.sourceMap,
   indentType: 'space',
@@ -69,8 +75,8 @@ configs.css = {
 
 configs.img = {
   type: '/**/*.{jpg,jpeg,png,gif,svg}',
-  src: configs.root + '/resource/image',
-  dest: configs.dest + '/resource/image'
+  src: `${configs.root}/resource/image`,
+  dest: `${configs.dest}/resource/image`
 }
 
 const plugins = {

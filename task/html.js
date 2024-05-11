@@ -20,24 +20,23 @@ function compatiblePath( str ) {
 
 function convertSrcToRelativePath(htmlContent, currentFilePath) {
 
-  htmlContent = htmlContent.replace(/(?:src|href)="(.*?)"|'(.*?)'/g, (match, p1, p2) => {
-    const srcPath = p1 || p2; // p1, p2 중 하나는 undefined 일 것입니다.
-    if (!srcPath) return match; // src 경로가 없으면 변경하지 않습니다.
+  // 정규 표현식 수정: 단일 인용부호를 포함한 부분을 제거하고, src와 href 속성 값만 매칭하도록 함
+  htmlContent = htmlContent.replace(/\s(src|href)=["'](.*?)["']/g, (match, p1, p2) => {
+    // src 또는 href 의 경로
+    const srcPath = p2;
+
+    // src 경로가 없으면 변경하지 않음
+    if (!srcPath) return match;
 
     let relativeSrcPath = path.relative(path.dirname(currentFilePath), configs.dest).replace(/\\/g, '/')
-    let resourcePath = (relativeSrcPath) ? srcPath : srcPath.replace(/^\//g, '')
-    let type = 'src'
+    let resourcePath = (srcPath.startsWith('/')) ? srcPath.substring(1) : srcPath; // 절대 경로일 경우 맨 앞 '/' 제거
+    let type = p1; // p1은 'src' 또는 'href' 경로
 
-    switch(true) {
-      case /\/css\//g.test(srcPath):
-        type = 'href'
-        break;
-    }
-
-    return `${type}="${relativeSrcPath}${resourcePath}"`;
+    return ` ${type}="${relativeSrcPath}/${resourcePath}"`;
   });
 
   return htmlContent;
+
 }
 
 function compileHtml() {
