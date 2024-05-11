@@ -63,7 +63,8 @@ configs.css = {
   sourceMapContents: configs.sourceMap,
   indentType: 'space',
   indentWidth: 2,
-  outputStyle: configs.minify ? 'compressed' : 'expanded',
+  // outputStyle: configs.minify ? 'compressed' : 'expanded',
+  outputStyle: 'compressed',
 }
 
 configs.img = {
