@@ -87,7 +87,7 @@ if ( isWatch ) {
 
 } else {
 
-  globby( `${ configs.root }/resource/scss/**/!(_*).scss`, {} ).then( files => {
+  globby( `${ configs.css.src }/**/!(_*).scss`, {} ).then( files => {
     parseSass( files )
   })
 
