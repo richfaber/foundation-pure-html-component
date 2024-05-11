@@ -21,7 +21,7 @@
         "watch-js-chunk": "chokidar ./src/resource/js/*.* -c \"npm run js-chunk\"",
         "watch-js-page": "chokidar ./src/resource/js/page/**/* -c \"npm run js-page\"",
         "watch-img": "chokidar ./src/resource/image/** -c \"npm run img -- {path} {event}\"",
-        "watch-html": "chokidar ./src/**/* -c \"npm run html -- {path} {event}\"",
+        "watch-html": "chokidar **/*.njk -c \"npm run html -- {path} {event}\"",
         "watch-html-lint": "chokidar ./dist/**/*.html -c \"html-validate {path}\"",
         "watch": "npm-run-all -p watch-css watch-js-chunk watch-js-page watch-img watch-html watch-html-lint",
         "server-start": "babel-node task/server",
