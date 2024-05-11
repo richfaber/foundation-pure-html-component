@@ -1,4 +1,4 @@
-{% import "layout/headerVar.njk" as headerVar %}
+{% import "layout/headerVar.njk" as headerMeta %}
 
 <!-- @퍼블리셔: {{ 제작자 }} ({{ 이메일 }}){% if 사용자환경 %} {{ 사용자환경 }}{% endif %} -->
 <!-- @버전: v{{ 버전 }} ({{ 현재시간 }}) -->
@@ -13,16 +13,7 @@
 
 </head>
 <body>
-<div class="skipNavigation"></div>
 <div class="wrapper" id="__APP__">
-    <header id="header" role="banner">
-        <h1>header</h1>
-        <nav>
-            <a href="/html/intro">HTML</a> |
-            <a href="/css/intro">CSS</a> |
-            <a href="/javascript/intro">JavaScript</a>
-        </nav>
-    </header>
 
     <main id="body" role="main">
 
@@ -32,9 +23,6 @@
 
     </main>
 
-    <footer id="footer" role="contentinfo">
-        <p>&copy; footer</p>
-    </footer>
 </div>
 
 {% block pageScript %}
