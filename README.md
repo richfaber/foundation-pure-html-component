@@ -1,6 +1,6 @@
 # html + nunjucks + scss + es6 조합 빌드 환경
 
-- 서브모듈 테스트
+- 페이지에서 서브모듈 컴포넌트 수정한 경우
 - [build-tool-boilerplate](https://github.com/cferdinandi/build-tool-boilerplate) 참조하여, 재구성함
 
 **사전 설치**
