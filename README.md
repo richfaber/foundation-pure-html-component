@@ -1,6 +1,5 @@
 # html + nunjucks + scss + es6 조합 빌드 환경
 
-- [build-tool-boilerplate](https://github.com/cferdinandi/build-tool-boilerplate) 참조하여, 재구성함
 - `동일한 스타일가이드를 가지는 n개 프로젝트 구성` 에서, `스타일 가이드 작업파일` 들이 논리적 연결이 되어, 프로젝트의 build 시 포함되어 배포되는 것이 목적이다.
 - 자원들은 `css, js, image` 를 의미한다.
 - 자원들이 프로젝트에 포함됨 으로써, 스타일가이드 자원을 프로젝트에 포함시키기 위한 별도 서버구성을 할 필요가 없다.
