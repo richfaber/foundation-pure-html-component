@@ -12,7 +12,6 @@ let isWatch = !!argv.length
 // watch 대상파일
 let files = [ argv[0] ]
 let event = [ argv[1] ] // add, unlink
-let prefix = `${ configs.root }/page/`
 
 function compatiblePath( str ) {
   return str.replace( /\\/g, '/' )
@@ -74,7 +73,7 @@ function compileHtml() {
 }
 
 // 감지상태 이고, 레이아웃 파일의 변경이 아닌 경우
-if ( isWatch && !/^src\/layout/.test( files[0] ) ) {
+if ( isWatch && !/^src[\/\\]layout/.test( files[0] ) ) {
   console.log(`[html 감지]`, files, event)
 
   if ( event == 'unlink' ) {
