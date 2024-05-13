@@ -36,7 +36,8 @@ const configs = {
 }
 
 configs.js = {
-  chunk: [ 'ui-vendor.js', 'ui-polyfill.js' ],
+  chunk: [ 'styleguide-vendor.js', 'styleguide-polyfill.js' ],
+  component: [ 'styleguide-component.js' ],
   src: `${ configs.root }/resource/js`,
   dest: `${ configs.dest }/resource/js`
 }
@@ -62,7 +63,7 @@ configs.html = {
 }
 
 configs.css = {
-  chunk: [ '/resource/scss/app.scss' ],
+  chunk: [ '/resource/scss/styleguide.scss' ],
   src: `${ configs.root }/resource/scss`,
   dest: `${ configs.dest }/resource/scss`,
   sourceMap: configs.sourceMap,
@@ -75,15 +76,15 @@ configs.css = {
 
 configs.img = {
   type: '/**/*.{jpg,jpeg,png,gif,svg}',
-  src: `${configs.root}/resource/image`,
-  dest: `${configs.dest}/resource/image`
+  src: `${ configs.root }/resource/image`,
+  dest: `${ configs.dest }/resource/image`
 }
 
 const plugins = {
   js: [
     alias( {
       entries: [
-        { find: '@', replacement: path.resolve( __dirname, configs.root ) }
+        { find: '@', replacement: path.resolve( configs.root ) }
       ]
     } ),
     nodeResolve( {
