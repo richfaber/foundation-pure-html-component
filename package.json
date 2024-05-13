@@ -7,7 +7,6 @@
         "type": "git",
         "url": "http://github.com/richfaber/foundation-pure-html"
     },
-
     "scripts": {
         "clean": "recursive-delete dist",
         "js-chunk": "rollup --config task/rollup.chunk.js",
@@ -28,7 +27,6 @@
         "server-start": "babel-node task/server",
         "server": "npm-run-all -p clean build-dirty server-start watch"
     },
-
     "devDependencies": {
         "@babel/cli": "^7.24.5",
         "@babel/core": "^7.24.5",
@@ -39,7 +37,6 @@
         "@rollup/plugin-eslint": "^9.0.5",
         "@rollup/plugin-inject": "^5.0.5",
         "@rollup/plugin-json": "^6.1.0",
-        "@rollup/plugin-multi-entry": "^6.0.1",
         "@rollup/plugin-node-resolve": "^15.2.3",
         "browser-sync": "^2.26.14",
         "chokidar-cli": "^2.1.0",
