@@ -31,8 +31,12 @@ const configs = {
   minify: (process.env.NODE_ENV === 'production'),
   sourceMap: (process.env.NODE_ENV !== 'production'),
   port: {
-    dev: 10222
+    dev: 10232
   }
+}
+
+if ( process.env.NODE_ENV === 'submodule' ) {
+  configs.dest = '../dist/resource/poscmm'
 }
 
 configs.js = {
@@ -51,6 +55,7 @@ configs.html = {
     'cwd': process.cwd(),
     'flatten': false,
   },
+
   format: {
     indent_size: 2, // 들여쓰기 크기 [4]
     indent_char: ' ', // 들여쓰기 문자 [' ']
@@ -59,6 +64,7 @@ configs.html = {
     indent_inner_html: false, // <head> 및 <body> 섹션을 들여씀
     indent_empty_lines: false, // 빈라인을 유지할지 여부
   },
+
   relativePath: true // 상대경로 변환 여부
 }
 
@@ -70,8 +76,7 @@ configs.css = {
   sourceMapContents: configs.sourceMap,
   indentType: 'space',
   indentWidth: 2,
-  // outputStyle: configs.minify ? 'compressed' : 'expanded',
-  outputStyle: 'compressed',
+  outputStyle: configs.minify ? 'compressed' : 'expanded'
 }
 
 configs.img = {
@@ -135,7 +140,7 @@ const plugins = {
 if ( process.env.NODE_ENV === 'production' ) {
 
   if ( configs.minify ) {
-    plugins.js.push( terser() )
+    // plugins.js.push( terser() )
   }
 
 }
