@@ -28,7 +28,7 @@ function workPostCss( css, pathOut, fileName, prevMap ) {
 
       writeFile( pathOut, fileName, result.css );
 
-      if ( result.map ) {
+      if ( result.map && configs.sourceMap ) {
         // SourceMap을 별도의 파일로 저장합니다.
         writeFile( pathOut, fileName + '.map', result.map.toString() );
       }
