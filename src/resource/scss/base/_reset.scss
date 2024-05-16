@@ -1,24 +1,7 @@
 @charset "UTF-8";
 
-// 브라우저에서 제공하는 기본효과(그라디언트, 화살표등) 제거
-input[type="text"],
-input[type="password"],
-input[type="submit"],
-input[type="search"],
-input[type="button"],
-input[type="submit"],
-input[type="reset"],
-input[type="file"],
-input:checked[type="checkbox"],
-input[type="search"]::-webkit-search-cancel-button,
-textarea,
-button {
-  //appearance: none;
-}
-
 // 뷰표트 변환시 폰트크기 자동확대 방지
 body {
-  //-webkit-text-size-adjust: none;
   //text-size-adjust: none;
 }
 
@@ -85,13 +68,31 @@ q {
   }
 }
 
-input {
-  &[type="text"],
-  &[type="password"],
-  &[type="submit"],
-  &[type="search"] {
-    border-radius: 0;
-  }
+// 브라우저에서 제공하는 기본효과(그라디언트, 화살표등) 제거
+input[type="text"],
+input[type="password"],
+input[type="submit"],
+input[type="search"],
+input[type="button"],
+input[type="submit"],
+input[type="reset"],
+input[type="file"],
+input:checked[type="checkbox"],
+input[type="search"]::-webkit-search-cancel-button,
+textarea,
+button {
+  appearance: none;
+}
+
+input[type="button"],
+input[type="submit"],
+input[type="reset"],
+input[type="file"],
+input[type="password"],
+input[type="text"],
+input[type="search"],
+button {
+  border-radius: 0;
 }
 
 input,
@@ -110,6 +111,7 @@ select {
 
 button {
   border: 0 none;
+  padding: 0;
   background-color: transparent;
   cursor: pointer;
   box-shadow: none;
@@ -126,13 +128,6 @@ a {
   }
 }
 
-button,
-input[type="button"],
-input[type="submit"],
-input[type="reset"],
-input[type="file"] {
-  border-radius: 0;
-}
 
 table {
   border-collapse: collapse;
@@ -159,13 +154,6 @@ menu {
   margin: 0;
 }
 
-button {
-  border: 0;
-  padding: 0;
-  background: transparent;
-  cursor: pointer;
-}
-
 em {
   font-style: normal;
 }
@@ -181,11 +169,6 @@ h6 {
 
 label {
   cursor: pointer;
-}
-
-p {
-  margin: 0;
-  padding: 0;
 }
 
 del {
