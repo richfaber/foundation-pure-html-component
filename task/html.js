@@ -15,7 +15,7 @@ let isWatch = !!argv.length
 let files = [ argv[0] ]
 let event = [ argv[1] ] // add, unlink
 
-const isSubmodule = (process.env.NODE_ENV === 'submodule')
+const isSubmodule = (process.env.GIT_ENV === 'submodule')
 
 function compatiblePath( str ) {
   return str.replace( /\\/g, '/' )

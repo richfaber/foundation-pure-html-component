@@ -24,19 +24,15 @@ const exclude = [ 'node_modules/**' ]
 const configs = {
   name: pkg.name,
   root: 'src',
-  dest: 'dist',
+  dest: (process.env.GIT_ENV === 'submodule') ? '../dist/poscmm' : 'dist',
   // formats: ['iife', 'es', 'amd', 'cjs'],
   formats: [ 'iife' ],
   default: 'iife',
   minify: (process.env.NODE_ENV === 'production'),
-  sourceMap: (process.env.NODE_ENV !== 'production'),
+  sourceMap: (process.env.NODE_ENV !== 'production' || process.env.GIT_ENV !== 'submodule'),
   port: {
     dev: 10232
   }
-}
-
-if ( process.env.NODE_ENV === 'submodule' ) {
-  configs.dest = '../dist/poscmm'
 }
 
 configs.js = {
