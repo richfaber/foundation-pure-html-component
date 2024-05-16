@@ -76,9 +76,9 @@ function parseSass( srcFiles ) {
       ...configs.css
     }, function ( err, result ) {
 
-      if ( err ) throw err;
+      if ( err ) throw err
 
-      workPostCss( result.css.toString(), outFilePath, outFileName, result.map.toString() );
+      workPostCss( result.css.toString(), outFilePath, outFileName, (result.map) && result.map.toString() )
 
     } )
 
