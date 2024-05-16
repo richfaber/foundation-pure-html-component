@@ -21,7 +21,7 @@ function compatiblePath( str ) {
 function workPostCss( css, pathOut, fileName, prevMap ) {
   return postcss( [ autoprefixer ] )
     .process( css, {
-      from: undefined, // SourceMap을 생성할 때 입력 파일 경로가 필요하지 않습니다.
+      from: pathOut,
       map: prevMap ? { prev: prevMap, inline: false, annotation: false } : { inline: false, annotation: false }
     } )
     .then( result => {
@@ -78,7 +78,7 @@ function parseSass( srcFiles ) {
 
       if ( err ) throw err;
 
-      workPostCss( result.css.toString(), outFilePath, outFileName );
+      workPostCss( result.css.toString(), outFilePath, outFileName, result.map.toString() );
 
     } )
 
@@ -95,11 +95,11 @@ if ( isWatch ) {
 
   // 파일명이 '_' 인 경우
   if ( /_[^\/]*?\.*$/.test( files[0] ) ) {
-    files = configs.css.chunk
-    console.log( `>> '_' 파일은 import 대상으로, 컴파일 제외` )
+    files = configs.css.chunk.map( file => `${ configs.root }${ file }` )
+    console.log( `>> '_' 파일은 import 대상으로, 컴파일 제외, chunk 컴파일\n${files}` )
   }
 
-  parseSass( files.map( file => `${ configs.root }${ file }` ) )
+  parseSass( files )
 
 } else {
 
