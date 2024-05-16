@@ -18,7 +18,7 @@
         "build": "cross-env NODE_ENV=production npm-run-all -s clean build:dirty html-lint",
         "build:dirty": "npm-run-all -p js-chunk js-comp css img html",
         "build:forparent": "cross-env GIT_ENV=submodule npm-run-all -p js-chunk js-comp css img",
-        "watch:css": "chokidar ./src/resource/scss/** -c \"npm run css -- {path} {event}\"",
+        "watch:css": "chokidar ./src/resource/scss/**/*.scss -c \"npm run css -- {path} {event}\"",
         "watch:js-chunk": "chokidar ./src/resource/js/*.* -c \"npm run js-chunk\"",
         "watch:js-comp": "chokidar ./src/resource/js/**/* -c \"npm run js-comp\"",
         "watch:img": "chokidar ./src/resource/image/** -c \"npm run img -- {path} {event}\"",
