@@ -36,7 +36,7 @@ const configs = {
 }
 
 if ( process.env.NODE_ENV === 'submodule' ) {
-  configs.dest = '../dist/resource/poscmm'
+  configs.dest = '../dist/poscmm'
 }
 
 configs.js = {
