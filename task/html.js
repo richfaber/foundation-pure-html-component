@@ -116,7 +116,7 @@ function compileHtml() {
   } );
 }
 
-// 감지상태 이고, 레이아웃 파일의 변경이 아닌 경우
+// 감지상태 이고, 컴파일 대상이 아닌 경우
 if ( isWatch && isIgnore ) {
   console.log( `[html 감지]`, files, event )
 
