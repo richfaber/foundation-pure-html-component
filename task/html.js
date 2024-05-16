@@ -9,12 +9,15 @@ import { configs } from '../configs'
 const fsp = fs.promises;
 
 let argv = process.argv.slice( 2 )
-let isWatch = !!argv.length
 
 // watch 대상파일
 let files = [ argv[0] ]
 let event = [ argv[1] ] // add, unlink
 
+const isWatch = !!argv.length
+
+// 컴파일 제외 대상파일
+const isIgnore = isWatch && !/^src[\/\\]layout/.test( files[0] ) || /^src[\/\\]import/.test( files[0] )
 const isSubmodule = (process.env.GIT_ENV === 'submodule')
 
 function compatiblePath( str ) {
@@ -114,7 +117,7 @@ function compileHtml() {
 }
 
 // 감지상태 이고, 레이아웃 파일의 변경이 아닌 경우
-if ( isWatch && !/^src[\/\\]layout/.test( files[0] ) ) {
+if ( isWatch && isIgnore ) {
   console.log( `[html 감지]`, files, event )
 
   if ( event == 'unlink' ) {
@@ -126,7 +129,7 @@ if ( isWatch && !/^src[\/\\]layout/.test( files[0] ) ) {
 
 } else {
 
-  globby( [ `${ configs.root }/**/*.njk`, `!${ configs.root }/layout/**` ] ).then( filePaths => {
+  globby( [ `${ configs.root }/**/*.njk`, `!${ configs.root }/layout/**`, `!${ configs.root }/import/**` ] ).then( filePaths => {
     files = filePaths.map( filePath => filePath.replace( 'src/', '' ) )
   } ).then( compileHtml )
 
