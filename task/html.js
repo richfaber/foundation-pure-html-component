@@ -41,7 +41,7 @@ function convertSrcToRelativePath( htmlContent, currentFilePath ) {
     const srcPath = p2;
 
     // src 경로가 없거나, 웹서버 자원이면 변경하지 않음
-    if ( !srcPath || /^https:|http:/g.test(srcPath)) return match;
+    if ( !srcPath || /^https:|http:/g.test( srcPath ) ) return match;
 
     let relativeSrcPath = path.relative( path.dirname( currentFilePath ), configs.dest ).replace( /\\/g, '/' )
     let resourcePath = (srcPath.startsWith( '/' )) ? srcPath.substring( 1 ) : srcPath; // 절대 경로일 경우 맨 앞 '/' 제거

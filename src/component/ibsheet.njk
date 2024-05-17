@@ -1,0 +1,32 @@
+{% import "import/headerVar.njk" as headerVar %}
+{% extends "layout/default.njk" %}
+
+{% set 제작자 = "이희원" %}
+{% set 이메일 = "userEmail@domain.com" %}
+{% set 페이지아이디 = "ibsheet" %}
+{% set 페이지타이틀 = "ibsheet" %}
+
+{% block pageScript %}
+<script type="text/javascript" src="/resource/js/styleguide-component.js"></script>
+{% endblock %}
+
+{% block body %}
+
+{#    {{ ibsheetResource() }}#}
+<link rel="stylesheet" type="text/css" href="https://demo.ibsheet.com/ibsheet/v8/samples/customer-sample/assets/ibsheet/css/default/main.css" />
+<link rel="stylesheet" type="text/css" href="https://demo.ibsheet.com/ibsheet/v8/samples/customer-sample/assets/ibsheet/css/compatible/light/main.css" />
+
+<script src="https://demo.ibsheet.com/ibsheet/v8/samples/customer-sample/assets/ibsheet/ibsheet.js"></script>
+<script src="https://demo.ibsheet.com/ibsheet/v8/samples/customer-sample/assets/ibsheet/ibleaders.js"></script>
+<script src="https://demo.ibsheet.com/ibsheet/v8/samples/customer-sample/assets/ibsheet/locale/ko.js"></script>
+<script src="https://demo.ibsheet.com/ibsheet/v8/samples/customer-sample/assets/ibsheet/plugins/ibsheet-common.js"></script>
+<script src="https://demo.ibsheet.com/ibsheet/v8/samples/customer-sample/assets/ibsheet/plugins/ibsheet-excel.js"></script>
+<script src="https://demo.ibsheet.com/ibsheet/v8/samples/customer-sample/assets/ibsheet/plugins/ibsheet-dialog.js"></script>
+
+    <div class="POSCMMIbsheet" id="POSCMMIbsheet1">
+
+        ddd
+
+    </div>
+
+{% endblock %}

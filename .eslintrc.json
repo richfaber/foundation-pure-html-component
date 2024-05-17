@@ -6,7 +6,9 @@
     "jquery": true
   },
   "globals": {
-    "ENV": true
+    "ENV": true,
+    "IBSheet": "readonly",
+    "IB_Preset": "readonly"
   },
   "extends": "eslint:recommended",
   "parserOptions": {
