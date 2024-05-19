@@ -1,4 +1,4 @@
-{% import "import/headerVar.njk" as headerVar %}
+{% import "import/headerVar.njk" as header %}
 
 <!-- @퍼블리셔: {{ 제작자 }} ({{ 이메일 }}){% if 사용자환경 %} {{ 사용자환경 }}{% endif %} -->
 <!-- @버전: v{{ 버전 }} ({{ 현재시간 }}) -->
@@ -8,8 +8,8 @@
 
     <title>페이지 제목{% if 페이지타이틀 %} - {{ 페이지타이틀 }}{% endif %}</title>
 
-    {{ headerVar.meta() }}
-    {{ headerVar.resource() }}
+    {{ header.meta() }}
+    {{ header.resource() }}
 
     {% block pageCss %}
     {% endblock %}
