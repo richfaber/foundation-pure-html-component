@@ -134,11 +134,7 @@ const plugins = {
 }
 
 if ( process.env.NODE_ENV === 'production' ) {
-
-  if ( configs.minify ) {
-    // plugins.js.push( terser() )
-  }
-
+  
 }
 
 export { configs, plugins, exclude }

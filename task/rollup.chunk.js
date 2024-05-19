@@ -1,5 +1,6 @@
 import pkg from '../package.json'
 import { configs, plugins } from '../configs'
+import { terser } from "rollup-plugin-terser"
 
 const createOutput = function ( filename, minify ) {
   return configs.formats.map( function ( format ) {
@@ -30,7 +31,10 @@ const createExport = function ( file ) {
     return {
       input: `${ configs.js.src }/${ file }`,
       output: createOutput( filename ),
-      plugins: plugins.js
+      plugins: [
+        terser(),
+        ...plugins.js
+      ]
     };
   } );
 
